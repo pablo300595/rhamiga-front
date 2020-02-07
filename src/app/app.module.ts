@@ -11,14 +11,18 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material/button';
 //App Components
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/subcomponents/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/subcomponents/navbar/navbar.component';
+import { FooterComponent } from './components/subcomponents/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
