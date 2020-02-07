@@ -1,0 +1,47 @@
+#navbar
+    width: 100%
+    background-color: rgba(0, 0, 0, 0.884)
+    position: fixed
+    z-index: 10
+    top: 0
+    left: 0
+    display: flex
+    justify-content: space-around
+    align-items: center
+    #navbar-burguer
+        display: flex
+        justify-content: center
+        align-items: center
+        #navbar-logo
+            padding: 10px
+        p
+            padding: 10px
+            cursor: pointer
+    nav
+        ul
+            display: flex
+            flex-direction: row
+            list-style: none
+            justify-content: space-evenly
+            align-items: center
+            li
+                color: white
+                padding: 5px
+                font-size: 16px
+                cursor: pointer
+            li:hover
+                opacity: 0.6
+        ul:last-child
+            margin-right: 0
+
+@media ( max-width:  800px)
+    #navbar
+        flex-direction: column
+        #navbar-logo 
+            width: 70%
+            height: auto
+        nav
+            ul
+                flex-direction: column
+
+    

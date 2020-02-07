@@ -1,0 +1,14 @@
+<div id="navbar" (window:resize)="onResize($event)">
+    <div id="navbar-burguer">
+        <img id="navbar-logo" src="https://novaresidencia.000webhostapp.com/imagenes/tilesets/companyLogo.png" alt="logo">
+        <p [hidden]="isResolutionDesktop" (click)="burgerMenuClicked()">Menu</p>
+    </div>
+    <nav [hidden]="!isResolutionDesktop && !burgerClicked">
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Links</li>
+            <li>Contact</li>
+        </ul>
+    </nav>
+</div>
