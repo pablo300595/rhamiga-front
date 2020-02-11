@@ -2,9 +2,13 @@
     <div class="login-card">
         <i class="fas fa-user-circle ico"></i>
         <h1>Member Login</h1>
-        <input id="username" type="text" placeholder="E.g. pabloeng05">
-        <input id="password" type="password" placeholder="E.g. pabloeng05">
-        <input id="auth" type="button" value="Sign in">
-        <p id="password-forgotten">¿Contraseña olvidada?</p>
+        <input [(ngModel)]="username" id="username" type="text" placeholder="E.g. pabloeng05">
+        <input [(ngModel)]="password" id="password" type="password" placeholder="E.g. pabloeng05">
+        <input (click)="authUser()" id="auth" type="button" value="Sign in">
+        <p id="password-forgotten" [routerLink]="['/register']">¿Sin cuenta? crear una</p>
+                                     
+    </div>
+    <div>
+        <p id="incorrect-auth" *ngIf="incorrectAuth">Contraseña o usuario incorrecto</p>
     </div>
 </div>

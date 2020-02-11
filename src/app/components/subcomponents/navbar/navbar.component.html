@@ -5,10 +5,11 @@
     </div>
     <nav [hidden]="!isResolutionDesktop && !burgerClicked">
         <ul>
-            <li>Home</li>
+            <li [routerLink]="['/home']">Home</li>
             <li>About</li>
             <li>Links</li>
             <li>Contact</li>
+            <li *ngIf="isUserLoged" (click)="signOut()">Cerrar Sesión</li>
         </ul>
     </nav>
 </div>
