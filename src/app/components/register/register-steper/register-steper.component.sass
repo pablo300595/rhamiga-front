@@ -1,0 +1,39 @@
+#register-steper
+    font-family: 'Oswald', sans-serif
+    background-color: #443838
+    position: fixed
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-top: 72px
+    .step
+        background-color: #443838
+        color: #ffffff
+        width: 200px
+        cursor: pointer
+        text-align: center
+    .step:hover
+        opacity: 0.6
+        background-color: #221e1e
+    .next-step
+        background-color: #443838
+        color: #ffffff
+        width: 200px
+        text-align: center
+        i
+            font-size: 45px
+            cursor: pointer
+        i:hover
+            opacity: 0.6
+
+
+@media ( max-width:  800px)
+    #register-steper
+        margin-top: 60px
+        .step
+            font-size: 12px
+            width: 100px
+        .next-step
+            i
+                font-size: 25px

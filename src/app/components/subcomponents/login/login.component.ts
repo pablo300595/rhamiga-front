@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { UserService } from './../../../services/user.service';
 import { SessionService } from './../../../services/session.service';
 import { LocalstorageService } from './../../../services/localstorage.service';
-import { EventEmitterService } from './../../../services/event-emitter.service';
+import { NotificationService } from './../../../services/notifications/notification.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   password: string;
   incorrectAuth: Boolean;
   constructor(private userService: UserService, private sessionService: SessionService,
-    private storage: LocalstorageService) {
+    private storage: LocalstorageService, private notification: NotificationService) {
       
   }
   
@@ -28,17 +28,20 @@ export class LoginComponent implements OnInit {
     this.userService.authUser(userdata).subscribe((res) => {
       console.log(res);
       this.incorrectAuth = res[0] == undefined;
-      let newSession = {
-        user: res[0]._id,
-        sessionStart: new Date(),
-        active: true
-      }
+      
       if (!this.incorrectAuth) {
+        let newSession = {
+          user: res[0]._id,
+          sessionStart: new Date(),
+          active: true
+        }
         this.sessionService.insertSession(newSession).subscribe((res) => {
           localStorage.setItem('user', this.username);
           this.storage.changeIfUserIsLoged();
           console.log('Session Started!');
         });
+      } else {
+        this.notification.warn('¡Error, usuario o contraseña erróneos!');
       }
     });
     console.log('Processing...');

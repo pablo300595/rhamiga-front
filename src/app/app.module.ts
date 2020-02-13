@@ -9,6 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 //Angular Modules
 import { RouterModule, Routes } from '@angular/router';
@@ -20,6 +21,7 @@ import { UserService } from './services/user.service';
 import { SessionService } from './services/session.service';
 import { EventEmitterService } from './services/event-emitter.service';
 import { LocalstorageService } from './services/localstorage.service';
+import { NotificationService } from './services/notifications/notification.service';
 //App Components
 import { LoginComponent } from './components/subcomponents/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -29,6 +31,8 @@ import { WelcomeComponent } from './components/subcomponents/welcome/welcome.com
 import { NotallowedComponent } from './components/notallowed/notallowed.component';
 import { CandidateComponent } from './components/candidate/candidate.component';
 import { RegisterComponent } from './components/register/register.component';
+import { RegisterSteperComponent } from './components/register/register-steper/register-steper.component';
+import { RegisterStepOneComponent } from './components/register/register-step-one/register-step-one.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,9 @@ import { RegisterComponent } from './components/register/register.component';
     WelcomeComponent,
     NotallowedComponent,
     CandidateComponent,
-    RegisterComponent
+    RegisterComponent,
+    RegisterSteperComponent,
+    RegisterStepOneComponent
   ],
   imports: [
     BrowserModule,
@@ -51,10 +57,12 @@ import { RegisterComponent } from './components/register/register.component';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatSnackBarModule,
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService, SessionService, EventEmitterService, LocalstorageService],
+  providers: [UserService, SessionService, EventEmitterService, LocalstorageService,
+    NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
