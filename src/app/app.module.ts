@@ -17,22 +17,36 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'; 
 //Services
-import { UserService } from './services/user.service';
-import { SessionService } from './services/session.service';
-import { EventEmitterService } from './services/event-emitter.service';
-import { LocalstorageService } from './services/localstorage.service';
+import { UserService } from './services/http-request/user/user.service';
+import { SessionService } from './services/http-request/session/session.service';
+import { LocalstorageService } from './services/localstorage/localstorage.service';
 import { NotificationService } from './services/notifications/notification.service';
+//DropZone
+import { DropzoneConfigInterface, DROPZONE_CONFIG, DropzoneModule } from 'ngx-dropzone-wrapper';
 //App Components
-import { LoginComponent } from './components/subcomponents/login/login.component';
+import { LoginComponent } from './components/home/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/subcomponents/navbar/navbar.component';
 import { FooterComponent } from './components/subcomponents/footer/footer.component';
-import { WelcomeComponent } from './components/subcomponents/welcome/welcome.component';
+import { WelcomeComponent } from './components/home/welcome/welcome.component';
 import { NotallowedComponent } from './components/notallowed/notallowed.component';
 import { CandidateComponent } from './components/candidate/candidate.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RegisterSteperComponent } from './components/register/register-steper/register-steper.component';
 import { RegisterStepOneComponent } from './components/register/register-step-one/register-step-one.component';
+import { RegisterStepTwoComponent } from './components/register/register-step-two/register-step-two.component';
+
+const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
+   url: 'https://app-apipruebas.herokuapp.com/upload',
+   maxFilesize: 3,
+   acceptedFiles: '.pdf',
+   createImageThumbnails: true,
+   maxThumbnailFilesize: 10,
+   thumbnailWidth: 800,
+   thumbnailHeight: 800,
+   dictDefaultMessage: 'Arrastre los archivos o de click para su carga',
+   clickable: true
+ };
 
 @NgModule({
   declarations: [
@@ -46,7 +60,8 @@ import { RegisterStepOneComponent } from './components/register/register-step-on
     CandidateComponent,
     RegisterComponent,
     RegisterSteperComponent,
-    RegisterStepOneComponent
+    RegisterStepOneComponent,
+    RegisterStepTwoComponent
   ],
   imports: [
     BrowserModule,
@@ -59,10 +74,11 @@ import { RegisterStepOneComponent } from './components/register/register-step-on
     MatButtonModule,
     MatSnackBarModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DropzoneModule
   ],
-  providers: [UserService, SessionService, EventEmitterService, LocalstorageService,
-    NotificationService],
+  providers: [UserService, SessionService, LocalstorageService,
+    NotificationService, { provide: DROPZONE_CONFIG, useValue: DEFAULT_DROPZONE_CONFIG}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

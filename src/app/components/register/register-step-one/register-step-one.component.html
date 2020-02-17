@@ -5,11 +5,11 @@
       <i class="fas fa-user-shield"></i>
     </div>
     <p>Usuario: </p>
-    <input type="text" placeholder="Nombre">
+    <input type="text" placeholder="Nombre"[(ngModel)]="step1FormUsername" (change)=updateFormFields()>
     <p>Contraseña: </p>
-    <input type="password" placeholder="...">
+    <input type="password" placeholder="..." [(ngModel)]="step1FormPassword" (change)=updateFormFields()>
     <p>Confirmar contraseña: </p>
-    <input type="password" placeholder="...">
+    <input type="password" placeholder="..." [(ngModel)]="step1FormPasswordConfirm" (change)=updateFormFields()>
   </div>
   <div class="register-user-data">
     <div class="card-title">
@@ -17,25 +17,25 @@
       <i class="fas fa-info-circle"></i>
     </div>
     <p>Nombre(s): </p>
-    <input type="text" placeholder="Nombre">
+    <input type="text" placeholder="Nombre" [(ngModel)]="step1FormFirstName" (change)=updateFormFields()>
     <p>Apellidos: </p>
-    <input type="text" placeholder="...">
+    <input type="text" placeholder="..." [(ngModel)]="step1FormLastName" (change)=updateFormFields()>
     <p>Edad: </p>
-    <input type="number" placeholder="...">
+    <input type="number" placeholder="..." [(ngModel)]="step1FormAge" (change)=updateFormFields()>
     <p>Sexo: </p>
-    <select>
+    <select [(ngModel)]="step1FormSex" (change)=updateFormFields()>
       <option>Masculino</option>
       <option>Femenino</option>
     </select>
     <p>Nacionalidad: </p>
-    <input type="text" placeholder="...">
+    <input type="text" placeholder="..." [(ngModel)]="step1FormNationality" (change)=updateFormFields()>
     <p>Estado: </p>
-    <select>
+    <select [(ngModel)]="step1FormState" (change)=updateFormFields()>
       <option>Nayarit</option>
       <option>Jalisco</option>
     </select>
     <p>Ciudad: </p>
-    <input type="text" placeholder="...">
+    <input type="text" placeholder="..." [(ngModel)]="step1FormCity" (change)=updateFormFields()>
     
   </div>
 </div>

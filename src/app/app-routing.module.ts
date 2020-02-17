@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
-import { WelcomeComponent } from './components/subcomponents/welcome/welcome.component';
+import { WelcomeComponent } from './components/home/welcome/welcome.component';
 import { NotallowedComponent } from './components/notallowed/notallowed.component';
 
 const routes: Routes = [

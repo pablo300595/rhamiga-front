@@ -7,15 +7,106 @@
     justify-content: center
     align-items: center
     margin-top: 72px
-    .step
+    .step-one
         background-color: #443838
         color: #ffffff
         width: 200px
         cursor: pointer
         text-align: center
-    .step:hover
+        #step-one-ico
+            background-color: none
+            border-radius: 8px
+            color: #ffffff
+    .step-two
+        opacity: 0.4
+        background-color: #443838
+        color: #ffffff
+        width: 200px
+        cursor: pointer
+        text-align: center
+        #step-two-ico
+            background-color: none
+            border-radius: 8px
+            color: #ffffff
+    .step-three
+        opacity: 0.4
+        background-color: #443838
+        color: #ffffff
+        width: 200px
+        cursor: pointer
+        text-align: center
+        #step-three-ico
+            background-color: none
+            border-radius: 8px
+            color: #ffffff
+    .step-four
+        opacity: 0.4
+        background-color: #443838
+        color: #ffffff
+        width: 200px
+        cursor: pointer
+        text-align: center
+        #step-four-ico
+            background-color: none
+            border-radius: 8px
+            color: #ffffff
+    .step-one:hover
         opacity: 0.6
         background-color: #221e1e
+    .step-two:hover
+        opacity: 0.6
+        background-color: #221e1e
+    .step-three:hover
+        opacity: 0.6
+        background-color: #221e1e
+    .step-four:hover
+        opacity: 0.6
+        background-color: #221e1e
+    .step-line-one
+        display: flex
+        justify-content: center
+        align-items: center
+        #line-one
+            width: 50px
+            height: 4px
+            border: 2px solid #706363
+            background-color: #5c5a45
+        #step-circle-one
+            width: 10px
+            height: 10px
+            border: 2px solid #706363
+            background-color: #5c5a45
+            border-radius: 6px
+    .step-line-two
+        display: flex
+        justify-content: center
+        align-items: center
+        #line-two
+            width: 50px
+            height: 4px
+            border: 2px solid #706363
+            background-color: #5c5a45
+        #step-circle-two
+            width: 10px
+            height: 10px
+            border: 2px solid #706363
+            background-color: #5c5a45
+            border-radius: 6px
+    .step-line-three
+        display: flex
+        justify-content: center
+        align-items: center
+        #line-three
+            width: 50px
+            height: 4px
+            border: 2px solid #706363
+            background-color: #5c5a45
+        #step-circle-three
+            width: 10px
+            height: 10px
+            border: 2px solid #706363
+            background-color: #5c5a45
+            border-radius: 6px
     .next-step
         background-color: #443838
         color: #ffffff
@@ -27,13 +118,20 @@
         i:hover
             opacity: 0.6
 
-
 @media ( max-width:  800px)
     #register-steper
         margin-top: 60px
         .step
             font-size: 12px
             width: 100px
+        .step-line-one
+            display: none
+        .step-line-two
+            display: none
+        .step-line-three
+            display: none
+        .step-line-four
+            display: none
         .next-step
             i
                 font-size: 25px

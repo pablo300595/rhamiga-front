@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, Input } from '@angular/core';
-import { LocalstorageService } from './../../../services/localstorage.service';
+import { LocalstorageService } from '../../../services/localstorage/localstorage.service';
 
 @Component({
   selector: 'app-navbar',

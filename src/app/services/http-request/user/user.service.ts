@@ -11,6 +11,18 @@ export class UserService {
   }
   
   authUser(user: any){
-    return this.http.post(this.URL+'/auth', user)
+    return this.http.post(`${this.URL}/auth`, user)
+  }
+
+  getUserByUsername(username){
+    return this.http.get(`${this.URL}/username/${username}`);
+  }
+
+  getUserDataById(id) {
+    return this.http.get(`${this.URL}/${id}`);
+  }
+
+  createUser(user){
+    return this.http.post(this.URL, user);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { UserService } from './../../../services/user.service';
-import { SessionService } from './../../../services/session.service';
-import { LocalstorageService } from './../../../services/localstorage.service';
+import { UserService } from './../../../services/http-request/user/user.service';
+import { SessionService } from './../../../services/http-request/session/session.service';
+import { LocalstorageService } from '../../../services/localstorage/localstorage.service';
 import { NotificationService } from './../../../services/notifications/notification.service';
 import { NgForm } from '@angular/forms';
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.incorrectAuth = false;
   }
-
+  /* Activated when user clicks the form auth button*/
   authUser() {
     let userdata = { username: this.username, password: this.password };
     this.userService.authUser(userdata).subscribe((res) => {

@@ -1,0 +1,38 @@
+<div id="register-module">
+  <div class="register-user-data">
+    <div class="card-title">
+      <h1>Datos de contacto</h1>
+      <i class="fas fa-id-card"></i>
+    </div>
+    <p>Correo: </p>
+    <input type="email" placeholder="Nombre">
+    <p>Número de telefono: </p>
+    <input type="text" placeholder="...">
+  </div>
+  <div class="register-user-data">
+    <div class="card-title">
+      <h1>Datos de experiencia profesional</h1>
+      <i class="fas fa-user-tie"></i>
+    </div>
+    <p>Carrera: </p>
+    <input type="email" placeholder="Nombre">
+    <p>Grado academico: </p>
+    <input type="text" placeholder="...">
+    <p>Categoria: </p>
+    <input type="text" placeholder="...">
+    <p>Idiomas: </p>
+    <input type="text" placeholder="...">
+  </div>
+  <div id="file-module">
+    <div class="card-title">
+      <h1>Documentación</h1>
+      <i class="fas fa-folder-open"></i>
+    </div>
+    <p>Carrera: </p>
+    <input type="email" placeholder="Nombre">
+    <p>Carga de Documentación: </p>
+    <dropzone class="dropzone-container" [config]="config" [message]="'Haga click o arrastre archivos aquí para subirlos'"
+      (error)="onErrorCommon($event)" (success)="onUploadSuccess($event)" (drop)="onDrop($event)"
+      (click)="dropzoneClicked()"></dropzone>
+  </div>
+</div>

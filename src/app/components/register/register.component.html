@@ -1,2 +1,3 @@
 <app-register-steper></app-register-steper>
-<app-register-step-one></app-register-step-one>
+<app-register-step-one *ngIf="stepPhase=='one'"></app-register-step-one>
+<app-register-step-two *ngIf="stepPhase=='two'"></app-register-step-two>

@@ -1,25 +1,46 @@
 <div id="register-steper">
-    <div class="step">
+    <div class="step-one">
       <h3>Paso 1</h3>
       <p>Personal data</p>
-      <i class="far fa-check-circle"></i>
+      <i class="far fa-check-circle" id="step-one-ico" [@step-one-two-ico]="stepPhase"></i>
     </div>
-    <div class="step">
+
+    <div class="step-line-one">
+      <div id="step-circle-one" [@step-one-two-ico]="stepPhase"></div>
+      <div id="line-one" [@step-one-two-line]="stepPhase"></div>
+      <div id="step-circle-one" [@step-one-two-ico]="stepPhase"></div>
+    </div>
+    
+    <div class="step-two" [@step-two-init]="stepTwoButtonAnimation">
       <h3>Paso 2</h3>
       <p>Documentation</p>
-      <i class="far fa-check-circle"></i>
+      <i class="far fa-check-circle" id="step-two-ico"></i>
     </div>
-    <div class="step">
+    
+    <div class="step-line-two">
+      <div id="step-circle-two"></div>
+      <div id="line-two"></div>
+      <div id="step-circle-two"></div>
+    </div>
+    
+    <div class="step-three">
       <h3>Paso 3</h3>
       <p>Mail Confirm</p>
-      <i class="far fa-check-circle"></i>
+      <i class="far fa-check-circle" id="step-three-ico"></i>
     </div>
-    <div class="step">
+    
+    <div class="step-line-three">
+      <div id="step-circle-three"></div>
+      <div id="line-three"></div>
+      <div id="step-circle-three"></div>
+    </div>
+    
+    <div class="step-four">
       <h3>Paso 4</h3>
       <p>Terms</p>
-      <i class="far fa-check-circle"></i>
+      <i class="far fa-check-circle" id="step-four-ico"></i>
     </div>
-    <div class="next-step">
+    <div class="next-step" (click)=nextStep()>
       <i class="fas fa-arrow-circle-right"></i>
     </div>
   </div>
