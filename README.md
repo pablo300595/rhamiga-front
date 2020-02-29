@@ -1,3 +1,4 @@
+![Mirval Services Logo](https://novaresidencia.000webhostapp.com/imagenes/tilesets/companyLogo.png)
 # Mirval Services
 
 La plataforma de Mirval Services es una plataforma en desarrollo. Tiene como objetivo fundamental brindarle a las empresas del sector de Tecnologías de la información, un seguimiento continuo sobre los aspirantes que aplican a sus respectivos negocios. 
