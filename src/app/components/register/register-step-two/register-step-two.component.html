@@ -28,11 +28,17 @@
       <h1>Documentación</h1>
       <i class="fas fa-folder-open"></i>
     </div>
-    <p>Carrera: </p>
-    <input type="email" placeholder="Nombre">
-    <p>Carga de Documentación: </p>
-    <dropzone class="dropzone-container" [config]="config" [message]="'Haga click o arrastre archivos aquí para subirlos'"
-      (error)="onErrorCommon($event)" (success)="onUploadSuccess($event)" (drop)="onDrop($event)"
-      (click)="dropzoneClicked()"></dropzone>
+    <div class="card-content">
+      <div class="card-content-dropzone">
+        <div id="fakezone">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Arrastre archivo aquí para cargar</p>
+        </div>
+        <input id="dropzone" type="file" (change)="fileChanged($event)" (drop)=releasedFile($event)>
+      </div>
+      <!--<button type="submit" (click)="uploadFile()"></button>-->
+
+      <i class="fas fa-file-pdf" *ngIf="step2DropzoneCurriculum"></i>
+    </div>
   </div>
 </div>

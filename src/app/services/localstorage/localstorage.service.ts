@@ -103,4 +103,12 @@ export class LocalstorageService {
     localStorage.setItem('step1FormCity', data);
     this.step1FormCity.next(data);
   }
+
+  /*FORM Step 2 data*/
+  step2DropzoneCurriculum = new BehaviorSubject(localStorage.getItem('step2DropzoneCurriculum')!=null);
+  currentStep2DropzoneCurriculum = this.step2DropzoneCurriculum.asObservable();
+  changeStep2DropzoneCurriculum(data){
+    localStorage.setItem('step2DropzoneCurriculum', data);
+    this.step2DropzoneCurriculum.next(data);
+  }
 }

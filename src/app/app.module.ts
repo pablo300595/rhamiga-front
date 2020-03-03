@@ -4,18 +4,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 //Material Modules
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 //Angular Modules
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 //Services
 import { UserService } from './services/http-request/user/user.service';
 import { SessionService } from './services/http-request/session/session.service';
@@ -37,16 +37,16 @@ import { RegisterStepOneComponent } from './components/register/register-step-on
 import { RegisterStepTwoComponent } from './components/register/register-step-two/register-step-two.component';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
-   url: 'https://app-apipruebas.herokuapp.com/upload',
-   maxFilesize: 3,
-   acceptedFiles: '.pdf',
-   createImageThumbnails: true,
-   maxThumbnailFilesize: 10,
-   thumbnailWidth: 800,
-   thumbnailHeight: 800,
-   dictDefaultMessage: 'Arrastre los archivos o de click para su carga',
-   clickable: true
- };
+  url: 'http://localhost:3000/files',
+  maxFilesize: 3,
+  acceptedFiles: '.pdf',
+  createImageThumbnails: true,
+  maxThumbnailFilesize: 10,
+  thumbnailWidth: 800,
+  thumbnailHeight: 800,
+  dictDefaultMessage: 'No Arrastre los archivos o de click para su carga',
+  clickable: true
+};
 
 @NgModule({
   declarations: [
@@ -74,11 +74,12 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     MatButtonModule,
     MatSnackBarModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     DropzoneModule
   ],
   providers: [UserService, SessionService, LocalstorageService,
-    NotificationService, { provide: DROPZONE_CONFIG, useValue: DEFAULT_DROPZONE_CONFIG}],
+    NotificationService, { provide: DROPZONE_CONFIG, useValue: DEFAULT_DROPZONE_CONFIG }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

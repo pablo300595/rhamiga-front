@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DropzoneComponent, DropzoneDirective, DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { Component, OnInit } from '@angular/core';
+// Services
+import { LocalstorageService } from './../../../services/localstorage/localstorage.service';
+import { FilesService } from './../../../services/http-request/files/files.service';
 
 @Component({
   selector: 'app-register-step-two',
@@ -7,56 +9,32 @@ import { DropzoneComponent, DropzoneDirective, DropzoneConfigInterface } from 'n
   styleUrls: ['./register-step-two.component.sass']
 })
 export class RegisterStepTwoComponent implements OnInit {
-  public type = 'component';
-  public config: DropzoneConfigInterface;
-  @ViewChild(DropzoneComponent, { static: true }) componentRef?: DropzoneComponent;
-  constructor() {
-    this.config = {
-      clickable: true, maxFiles: 2,
-      params: { 'usuario': 'this.userLoged', 'filename': 'CERTIFICADO.pdf', 'isImage': false },
-      accept: (file, done) => {
-        alert('archivo aceptado!');
-        done();
-      },
-      autoReset: 1,
-      errorReset: 1
-    };
+  selectedFile: File = null;
+  // Service variables
+  step2DropzoneCurriculum: boolean;
+  constructor(private storage: LocalstorageService, private files: FilesService) {
+    storage.currentStep2DropzoneCurriculum.subscribe(res => this.step2DropzoneCurriculum = res);
   }
 
   ngOnInit() {
-  }
-  /*  DROPZONE 1 METHODS  */
-  public resetDropzoneUploads(): void {
-    this.componentRef.directiveRef.reset();
-  }
-
-  public onUploadInit(args: any): void {
 
   }
 
-  public onDragEnd(args: any): void {
-
+  fileChanged(event) {
+    this.selectedFile = <File>event.target.files[0];
   }
 
-  public onUploadSuccess(args: any): void {
-    alert('Archivo cargado');
+  uploadFile() {
+    this.files.uploadFile(this.selectedFile, 'curriculum.pdf').subscribe(res => {
+      this.storage.changeStep2DropzoneCurriculum('Uploaded');
+    }, (err) => {
+      console.log(err)
+    });
   }
 
-  onDrop(event: DragEvent) {
-    this.resetDropzoneUploads();
+  releasedFile(event){
+    alert('File released');
+    console.log(event.target.files[0]);
   }
-
-  onError(args: any) {
-    alert('Error');
-  }
-
-  onErrorCommon(args: any) {
-    this.resetDropzoneUploads();
-  }
-
-  dropzoneClicked() {
-    this.resetDropzoneUploads();
-  }
-
 
 }
