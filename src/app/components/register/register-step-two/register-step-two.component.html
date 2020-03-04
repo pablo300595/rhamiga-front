@@ -34,11 +34,17 @@
           <i class="fas fa-cloud-upload-alt"></i>
           <p>Arrastre archivo aquí para cargar</p>
         </div>
-        <input id="dropzone" type="file" (change)="fileChanged($event)" (drop)=releasedFile($event)>
+        <input id="dropzone" type="file" (change)="fileChanged($event)">
+        <div id="filezone" *ngIf="step2DropzoneCurriculum">
+          <i class="fas fa-file-pdf"></i>
+          <div class="filezone-data">
+            <b>
+              <p>{{selectedFileName}}</p>
+            </b>
+            <p>{{selectedFileProgress}}%</p>
+          </div>
+        </div>
       </div>
-      <!--<button type="submit" (click)="uploadFile()"></button>-->
-
-      <i class="fas fa-file-pdf" *ngIf="step2DropzoneCurriculum"></i>
     </div>
   </div>
 </div>
