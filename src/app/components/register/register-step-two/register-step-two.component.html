@@ -1,50 +1,129 @@
 <div id="register-module">
-  <div class="register-user-data">
-    <div class="card-title">
-      <h1>Datos de contacto</h1>
-      <i class="fas fa-id-card"></i>
-    </div>
-    <p>Correo: </p>
-    <input type="email" placeholder="Nombre">
-    <p>Número de telefono: </p>
-    <input type="text" placeholder="...">
+  <!------------------------------------BEGIN CARD CONTACTO------------------------------------>
+  <div class="register-module-header">
+    <h1>Datos de contacto</h1>
+    <i class="fas fa-id-card"></i>
   </div>
-  <div class="register-user-data">
-    <div class="card-title">
-      <h1>Datos de experiencia profesional</h1>
-      <i class="fas fa-user-tie"></i>
-    </div>
-    <p>Carrera: </p>
-    <input type="email" placeholder="Nombre">
-    <p>Grado academico: </p>
-    <input type="text" placeholder="...">
-    <p>Categoria: </p>
-    <input type="text" placeholder="...">
-    <p>Idiomas: </p>
-    <input type="text" placeholder="...">
+
+  <div class="register-module-card" id="contacto">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Correo: </mat-label>
+      <input matInput placeholder="Ex. pabloeng05@gmail.com" [(ngModel)]="step2FormEmail">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Número de teléfono: </mat-label>
+      <input matInput placeholder="Ex. 311-233-37-99" [(ngModel)]="step2FormPhoneNumber">
+    </mat-form-field>
+
   </div>
-  <div id="file-module">
-    <div class="card-title">
-      <h1>Documentación</h1>
-      <i class="fas fa-folder-open"></i>
-    </div>
-    <div class="card-content">
-      <div class="card-content-dropzone">
-        <div id="fakezone">
-          <i class="fas fa-cloud-upload-alt"></i>
-          <p>Arrastre archivo aquí para cargar</p>
+  <!------------------------------------FIN CARD CONTACTO------------------------------------>
+  <!----------------------------BEGIN CARD EXPERIENCIA PROF---------------------------------->
+  <div class="register-module-header">
+    <h1>Datos de experiencia profesional</h1>
+    <i class="fas fa-user-tie"></i>
+  </div>
+
+  <div class="register-module-card" id="experiencia">
+    <!--FIELD CARRERA-------------------------------------------------->
+    <mat-form-field appearance="fill">
+      <mat-label>Carrera: </mat-label>
+      <input matInput placeholder="Ex. Ing. Sistemas Computacionales" [(ngModel)]="step2FormCareer">
+    </mat-form-field>
+    <!--FIELD GRADO ACADEMICO---------------------------------------------------->
+    <mat-form-field appearance="fill">
+      <mat-label>Grado academico: </mat-label>
+      <mat-select [(ngModel)]="step2FormStudyLevel">
+        <mat-option *ngFor="let item of studyLevelList" [value]="item.value">
+          {{item.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!--FIELD CATEGORIA---------------------------------------------------------->
+    <mat-form-field appearance="fill">
+      <mat-label>Categoria: </mat-label>
+      <mat-select [(ngModel)]="step2FormCategory">
+        <mat-option *ngFor="let item of categoryList" [value]="item.value">
+          {{item.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!--FIELD AÑOS EXPERIENCIA--------------------------------------------------->
+    <mat-form-field appearance="fill">
+      <mat-label>Años de experiencia</mat-label>
+      <input matInput type="number" placeholder="Ex. 5" min="0" max="100" [(ngModel)]="step2FormExperience">
+    </mat-form-field>
+    <!--CARD IDIOMAS--------------------------------------------------------------------------------->
+    <div class="register-module-card-language">
+      <!--LABEL IDIOMAS--------------------------------------------------->
+      <p>Idiomas</p>
+      <!--CARD CONTENT--------------------------------------------------->
+      <div class="register-module-card-language-content">
+        <div class="register-module-card-language-content-row">
+          <mat-form-field appearance="fill">
+            <mat-select [(ngModel)]="selectedLanguage">
+              <mat-option *ngFor="let item of languageList" [value]="item.value">
+                {{item.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <i class="fas fa-plus-square" (click)="deleteLanguageListItem()"></i>
         </div>
-        <input id="dropzone" type="file" (change)="fileChanged($event)">
-        <div id="filezone" *ngIf="step2DropzoneCurriculum">
-          <i class="fas fa-file-pdf"></i>
-          <div class="filezone-data">
-            <b>
-              <p>{{selectedFileName}}</p>
-            </b>
-            <p>{{selectedFileProgress}}%</p>
-          </div>
+
+        <div class="register-module-card-language-content-row">
+          <mat-form-field appearance="fill">
+            <mat-select>
+              <mat-option *ngFor="let item of languageLevelList" [value]="item.value">
+                {{item.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <i class="fas fa-trash-alt" (click)="resetLanguageList()"></i>
+        </div>
+        <!--CARD CONTENT END--------------------------------------------------->
+      </div>
+
+      <mat-form-field appearance="outline">
+        <textarea matInput disabled></textarea>
+      </mat-form-field>
+      <div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <!----------------------------END CARD EXPERIENCIA PROF---------------------------------->
+  <!---------------------------------BEGIN CARD FILES-------------------------------------->
+  <div class="register-module-header">
+    <h1>Documentación</h1>
+    <i class="fas fa-folder-open"></i>
+  </div>
+
+  <div class="register-module-files">
+
+    <div class="register-module-files-content">
+
+      <div class="register-module-files-content-dropzone-fakezone">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p>Arrastre archivo aquí para cargar</p>
+      </div>
+
+      <input class="register-module-files-content-dropzone" type="file" (change)="fileChanged($event)">
+
+      <div class="register-module-files-content-dropzone-filezone" *ngIf="step2DropzoneCurriculum">
+        <i class="fas fa-file-pdf"></i>
+        <div class="register-module-files-content-dropzone-filezone-data">
+          <b>
+            <p>{{selectedFileName}}</p>
+          </b>
+          <p>{{selectedFileProgress}}%</p>
         </div>
       </div>
+
     </div>
+
   </div>
+
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 // Services
 import { LocalstorageService } from '../../../services/localstorage/localstorage.service';
+import { StepOneService } from '../../../services/localstorage/step-one/step-one.service';
 import { UserService } from './../../../services/http-request/user/user.service';
 import { NotificationService } from './../../../services/notifications/notification.service';
 import { CandidateService } from './../../../services/http-request/candidate/candidate.service';
@@ -52,32 +53,47 @@ export class RegisterSteperComponent implements OnInit {
   step1FormNationality: string;
   step1FormState: string;
   step1FormCity: string;
+  //FullForm
+  step1FullForm: any;
   //Validation Flags
   bothPasswordsAreEqual: boolean;
   //Animation Flags
   stepPhase: string;
   stepTwoButtonAnimation: string;
-  constructor(private storage: LocalstorageService, private userService: UserService,
-    private candidateService: CandidateService, private notification: NotificationService) {
-    storage.currentStep1FormUsername.subscribe(res => this.step1FormUsername = res);
-    storage.currentStep1FormPassword.subscribe(res => this.step1FormPassword = res);
-    storage.currentStep1FormPasswordConfirm.subscribe(res => this.step1FormPasswordConfirm = res);
-    storage.currentStep1FormFirstName.subscribe(res => this.step1FormFirstName = res);
-    storage.currentStep1FormLastName.subscribe(res => this.step1FormLastName = res);
-    storage.currentStep1FormAge.subscribe(res => this.step1FormAge = res);
-    storage.currentStep1FormSex.subscribe(res => this.step1FormSex = res);
-    storage.currentStep1FormNationality.subscribe(res => this.step1FormNationality = res);
-    storage.currentStep1FormState.subscribe(res => this.step1FormState = res);
-    storage.currentStep1FormCity.subscribe(res => this.step1FormCity = res);
-    storage.currentStepPhase.subscribe(res => this.stepPhase = res);
+  constructor(private storage: LocalstorageService, private stepOneService: StepOneService, 
+    private userService: UserService, private candidateService: CandidateService, 
+    private notification: NotificationService) {
+    this.initServiceFormFields();
     this.checkPosition();
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  initServiceFormFields() {
+    this.storage.currentStepPhase.subscribe(res => this.stepPhase = res);
+    this.stepOneService.currentStep1FormUsername.subscribe(res=> this.step1FormUsername = res);
+    this.stepOneService.currentStep1FormPassword.subscribe(res=> this.step1FormPassword = res);
+    this.stepOneService.currentStep1FormPasswordConfirm.subscribe(res => this.step1FormPasswordConfirm = res);
+    this.stepOneService.currentStep1FormFirstName.subscribe(res => this.step1FormFirstName = res);
+    this.stepOneService.currentStep1FormLastName.subscribe(res => this.step1FormLastName = res);
+    this.stepOneService.currentStep1FormAge.subscribe(res => this.step1FormAge = res);
+    this.stepOneService.currentStep1FormSex.subscribe(res => this.step1FormSex =res);
+    this.stepOneService.currentStep1FormNationality.subscribe(res => this.step1FormNationality = res);
+    this.stepOneService.currentStep1FormState.subscribe(res => this.step1FormState = res);
+    this.stepOneService.currentStep1FormCity.subscribe(res => this.step1FormCity = res);
+  }
+
+  checkPosition(){
+    switch(this.stepPhase){
+      case 'two':
+        this.changePosition('step-two');
+        this.changeStep2Btn('step-two-unlocked');
+        break;
+    }
   }
 
   nextStep() {
-    switch (localStorage.getItem('stepPhase')) {
+    switch (this.stepPhase) {
       case 'one':
         this.validateStep1();
         break;
@@ -158,17 +174,6 @@ export class RegisterSteperComponent implements OnInit {
   changeStep2Btn(newPosition: string){
     this.stepTwoButtonAnimation = newPosition;
   }
-
-  checkPosition(){
-    let step = localStorage.getItem('stepPhase')
-    switch(step){
-      case 'two':
-        this.changePosition('step-two');
-        this.changeStep2Btn('step-two-unlocked');
-        break;
-    }
-  }
-
 }
 
 

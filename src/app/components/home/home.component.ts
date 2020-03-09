@@ -11,27 +11,10 @@ import { LocalstorageService } from "../../services/localstorage/localstorage.se
 export class HomeComponent implements OnInit {
   isUserLoged: boolean;
   constructor(private storage: LocalstorageService) {
-    this.storage.currentIsUserLoged.subscribe(res => {
-      this.isUserLoged = res;
-      if(localStorage.getItem('stepPhase')==null) this.initStepOneFormData();
-    });
+    this.storage.currentIsUserLoged.subscribe(res => this.isUserLoged = res);
   }
 
   ngOnInit() {
-  }
-
-  initStepOneFormData() {
-    localStorage.setItem('stepPhase','one');
-    localStorage.setItem('step1FormUsername','');
-    localStorage.setItem('step1FormPassword','');
-    localStorage.setItem('step1FormPasswordConfirm','');
-    localStorage.setItem('step1FormFirstName','');
-    localStorage.setItem('step1FormLastName','');
-    localStorage.setItem('step1FormAge','');
-    localStorage.setItem('step1FormSex','Masculino');
-    localStorage.setItem('step1FormNationality','');
-    localStorage.setItem('step1FormState','Nayarit');
-    localStorage.setItem('step1FormCity','');
   }
 
 }

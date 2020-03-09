@@ -1,6 +1,10 @@
+//Angular Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+//App Component
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 //Material Modules
@@ -10,19 +14,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
-//Angular Modules
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { MatSelectModule } from '@angular/material/select';
 //Services
 import { UserService } from './services/http-request/user/user.service';
+import { CandidateService } from './services/http-request/candidate/candidate.service';
 import { SessionService } from './services/http-request/session/session.service';
 import { LocalstorageService } from './services/localstorage/localstorage.service';
+import { StepOneService } from './services/localstorage/step-one/step-one.service';
+import { StepTwoService } from './services/localstorage/step-two/step-two.service';
+import { StepThreeService } from './services/localstorage/step-three/step-three.service';
+import { StepFourService } from './services/localstorage/step-four/step-four.service';
 import { NotificationService } from './services/notifications/notification.service';
-//DropZone
-import { DropzoneConfigInterface, DROPZONE_CONFIG, DropzoneModule } from 'ngx-dropzone-wrapper';
 //App Components
 import { LoginComponent } from './components/home/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -35,18 +37,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { RegisterSteperComponent } from './components/register/register-steper/register-steper.component';
 import { RegisterStepOneComponent } from './components/register/register-step-one/register-step-one.component';
 import { RegisterStepTwoComponent } from './components/register/register-step-two/register-step-two.component';
-
-const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
-  url: 'http://localhost:3000/files',
-  maxFilesize: 3,
-  acceptedFiles: '.pdf',
-  createImageThumbnails: true,
-  maxThumbnailFilesize: 10,
-  thumbnailWidth: 800,
-  thumbnailHeight: 800,
-  dictDefaultMessage: 'No Arrastre los archivos o de click para su carga',
-  clickable: true
-};
 
 @NgModule({
   declarations: [
@@ -73,13 +63,13 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    DropzoneModule
+    HttpClientModule
   ],
-  providers: [UserService, SessionService, LocalstorageService,
-    NotificationService, { provide: DROPZONE_CONFIG, useValue: DEFAULT_DROPZONE_CONFIG }],
+  providers: [UserService, CandidateService, SessionService, LocalstorageService, StepOneService,
+    StepTwoService, StepThreeService, StepFourService, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

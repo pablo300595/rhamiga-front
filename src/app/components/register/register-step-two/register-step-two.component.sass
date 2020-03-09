@@ -1,147 +1,140 @@
+/*-----------------------------------------FILES SECTION----------------------------------------------*/
 #register-module
     background: linear-gradient(#e66465, #9198e5)
     width: 100%
-    height: 1300px
+    height: 1800px
     display: flex
     flex-direction: column
     justify-content: center
     align-items: center
-    .register-user-data
-        background-color: #cec5c5d2
-        background: linear-gradient(#e9e9e9, #d4d4db)
-        margin-bottom: 20px
-        width: 80%
+    .register-module-header
         display: flex
-        flex-direction: column
-        border-radius: 8px
+        width: 60%
+        background-color: #000000
         border: 3px solid #312e2e
-        .card-title
-            display: flex
-            width: 100%
-            background-color: #000000
-            h1
-                font-family: 'oswald', sans-serif
-                color: #ffffff
-                flex: 2
-            i
-                font-size: 40px
-                color: #ab78e6
-        p
+        h1
             font-family: 'oswald', sans-serif
-            font-size: 22px
-            color: #111010
-            margin: 0 5%
-        input
-            margin: 0 5%
-            font-family: 'oswald', sans-serif
-            font-size: 22px
-        input:last-child
-            margin-bottom: 20px
-    #file-module
+            color: rgb(255, 255, 255)
+            flex: 2
+        i
+            font-size: 40px
+            color: #ab78e6
+    .register-module-card
         background-color: #cec5c5d2
-        background: linear-gradient(#d8abab, #c3c3fa)
-        margin-bottom: 20px
-        width: 80%
-        height: 340px
+        background: linear-gradient(#ffffff, #f1f1f8)
+        margin-bottom: 30px
+        padding: 0
+        width: 60%
         display: flex
-        flex-direction: column
-        border-radius: 8px
-        border: 3px solid #312e2e
         align-items: center
-        .card-title
-            display: flex
-            width: 100%
-            background-color: #000000
-            h1
+        box-shadow: 5px 10px 8px 10px #1a1818
+        flex-direction: column
+        .mat-form-field
+            width: 80%
+            font-family: 'oswald', sans-serif
+            font-size: 20px
+            z-index: 0
+            .mat-select
                 font-family: 'oswald', sans-serif
-                color: #ffffff
-                flex: 2
-            i
-                font-size: 40px
-                color: #ab78e6
-        .card-content
+        .register-module-card-language
             display: flex
             flex-direction: column
-            margin-left: 0%
-            margin-right: 0%
             width: 80%
-            height: 100%
-            .card-content-dropzone
-                background-color: #343533
+            align-items: center
+            background-color: #f3eded
+            margin-bottom: 20px
+            .register-module-card-language-content
+                display: flex
+                flex-direction: column
+                margin-bottom: 20px
+                .register-module-card-language-content-row
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    i
+                        margin: 0 0 25px 25px
+                        font-size: 60px
+                        cursor: pointer
+                        color: #1fd8cf
+    .register-module-files
+        background-color: #cec5c5d2
+        background: linear-gradient(#ffffff, #f1f1f8)
+        margin-bottom: 20px
+        width: 60%
+        height: 200px
+        display: flex
+        flex-direction: column
+        align-items: center
+        box-shadow: 5px 10px 8px 10px #ffffff
+        .register-module-files-content
+            background-color: #233e99
+            width: 100%
+            height: 100px
+            border: 5px dashed #3e22a3
+            margin: 5% 0
+            .register-module-files-content-dropzone
+                background-color: #e90e32
                 width: 100%
-                height: 100px
-                border: 5px dashed #dd0e31
-                margin: 5% 0
-                #dropzone
-                    background-color: #e90e32
-                    width: 100%
-                    height: 100%
-                    z-index: 1
+                height: 100%
+                z-index: 1
+                position: relative
+                margin: 0
+                opacity: 0
+                bottom: 4.1em
+                cursor: pointer
+            .register-module-files-content-dropzone-fakezone
+                background: linear-gradient(#0bcfd6, #17e9e9)
+                width: 100%
+                height: 100%
+                z-index: 0
+                position: relative
+                display: flex
+                justify-content: center
+                align-items: center
+                flex-direction: row
+                i
+                    font-size: 40px
                     position: relative
-                    margin: 0
-                    opacity: 0
-                    bottom: 4.1em
-                    cursor: pointer
-                #fakezone
-                    background: linear-gradient(#e01212, #ec1313)
-                    width: 100%
-                    height: 100%
-                    z-index: 0
+                    color: #fafaff
+                p
+                    color: #ffffff
                     position: relative
+                    text-align: center
+            .register-module-files-content-dropzone-filezone
+                display: flex
+                border: 10px solid #ffffff
+                position: relative
+                width: 100%
+                background: #ffffff
+                flex-direction: row
+                align-items: center
+                justify-content: center
+                bottom: 5.3em
+                .register-module-files-content-dropzone-filezone-data
                     display: flex
-                    justify-content: center
-                    align-items: center
-                    flex-direction: row
-                    i
-                        font-size: 40px
-                        position: relative
-                        color: #fafaff
-                    p
-                        color: #ffffff
-                        position: relative
-                        text-align: center
-                #filezone
-                    display: flex
+                    flex-direction: column
                     border: 5px solid #ffffff
-                    position: relative
-                    width: 100%
-                    background: #ffffff
-                    flex-direction: row
-                    align-items: center
-                    justify-content: center
-                    bottom: 5.3em
-                    .filezone-data
-                        display: flex
-                        flex-direction: column 
-                    i
-                        font-size: 80px
+                i
+                    font-size: 80px
         p
             font-family: 'oswald', sans-serif
             font-size: 22px
             color: #111010
             margin: 0 5%
         input
-            margin: 0 5%
+            margin: 0 0%
             font-family: 'oswald', sans-serif
             font-size: 22px
-        input:last-child
-            margin-bottom: 20px
 
 @media ( max-width:  800px)
     #register-module
-        #file-module
-            height: 250px
-            .card-content
-                .card-content-dropzone
-                    #fakezone
-                        flex-direction: column
-                        i
-                            font-size: 30px  
-                        p
-                            font-size: 18px
-                    #filezone
-                        i
-                            font-size: 30px
-                        p
-                            font-size: 18px
-                            
+        .register-module-header
+            width: 95%
+        .register-module-card
+            width: 95%
+            .mat-form-field
+                width: 95%
+            .register-module-card-language
+                width: 95%
+        .register-module-files
+            width: 95%
