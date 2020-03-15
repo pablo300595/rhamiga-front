@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { HttpClient} from '@angular/common/http';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { UserService } from './../../../services/http-request/user/user.service';
+import { CandidateService } from './../../../services/http-request/candidate/candidate.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +30,14 @@ export class StepOneService {
   currentStep1FormState: Observable<any>;
   currentStep1FormCity: Observable<any>;
 
-  constructor() {
+  //Required Routes
+  URL_USER: string;
+  URL_CANDIDATE: string;
+
+  constructor(private http: HttpClient, private candidateService: CandidateService,
+    private userService: UserService) {
     this.initServiceVariables();
+    this.initRequestRoutes();
   }
 
   /* INITIALITATION METHOD ------------------------------------------------------------ */
@@ -54,6 +63,20 @@ export class StepOneService {
     this.currentStep1FormNationality = this.step1FormNationality.asObservable();
     this.currentStep1FormState = this.step1FormState.asObservable();
     this.currentStep1FormCity = this.step1FormCity.asObservable();
+  }
+
+  initRequestRoutes() {
+    this.URL_USER = this.userService.URL; 
+    this.URL_CANDIDATE = this.candidateService.URL; 
+  }
+  /* MULTI REQUESTS */
+  /*El siguiente método se usa para que en el paso 1 se evalue que no exista usuario duplicado,
+  cuando no es el caso se crea un usuario y después se le asocia información de candidato dada. */
+  generateUserCandidate(username, candidate){
+    const responseA = this.http.get(`${this.URL_USER}/username/${username}`);
+    const responseB = this.http.post(this.URL_CANDIDATE, candidate);
+    const responseC = this.http.post(`${this.URL_CANDIDATE}/find-id`, candidate);
+    return forkJoin([responseA, responseB, responseC]);
   }
   /* CHANGE METHODS ------------------------------------------------------------ */
   changeStep1FormUsername(data) {

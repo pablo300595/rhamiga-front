@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material';
 //Services
 import { UserService } from './services/http-request/user/user.service';
 import { CandidateService } from './services/http-request/candidate/candidate.service';
@@ -37,6 +38,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { RegisterSteperComponent } from './components/register/register-steper/register-steper.component';
 import { RegisterStepOneComponent } from './components/register/register-step-one/register-step-one.component';
 import { RegisterStepTwoComponent } from './components/register/register-step-two/register-step-two.component';
+import { RegisterStepThreeComponent } from './components/register/register-step-three/register-step-three.component';
+import { RegisterStepFourComponent } from './components/register/register-step-four/register-step-four.component';
+import { RepeatStepDialogComponent } from './components/register/register-steper/modals/repeat-step-dialog/repeat-step-dialog.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,10 @@ import { RegisterStepTwoComponent } from './components/register/register-step-tw
     RegisterComponent,
     RegisterSteperComponent,
     RegisterStepOneComponent,
-    RegisterStepTwoComponent
+    RegisterStepTwoComponent,
+    RegisterStepThreeComponent,
+    RegisterStepFourComponent,
+    RepeatStepDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -64,12 +71,14 @@ import { RegisterStepTwoComponent } from './components/register/register-step-tw
     MatButtonModule,
     MatSnackBarModule,
     MatSelectModule,
+    MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [UserService, CandidateService, SessionService, LocalstorageService, StepOneService,
     StepTwoService, StepThreeService, StepFourService, NotificationService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [RepeatStepDialogComponent]
 })
 export class AppModule { }

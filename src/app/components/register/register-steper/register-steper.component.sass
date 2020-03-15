@@ -8,7 +8,7 @@
     align-items: center
     margin-top: 72px
     z-index: 99
-    .step-one
+    .step-one-button
         background-color: #443838
         color: #ffffff
         width: 200px
@@ -18,7 +18,7 @@
             background-color: none
             border-radius: 8px
             color: #ffffff
-    .step-two
+    .step-two-button
         opacity: 0.4
         background-color: #443838
         color: #ffffff
@@ -26,10 +26,11 @@
         cursor: pointer
         text-align: center
         #step-two-ico
-            background-color: none
+            background-color: red
             border-radius: 8px
             color: #ffffff
-    .step-three
+            opacity: 0.2
+    .step-three-button
         opacity: 0.4
         background-color: #443838
         color: #ffffff
@@ -40,7 +41,8 @@
             background-color: none
             border-radius: 8px
             color: #ffffff
-    .step-four
+            opacity: 0.2
+    .step-four-button
         opacity: 0.4
         background-color: #443838
         color: #ffffff
@@ -51,19 +53,20 @@
             background-color: none
             border-radius: 8px
             color: #ffffff
-    .step-one:hover
+            opacity: 0.2
+    .step-one-button:hover
         opacity: 0.6
         background-color: #221e1e
-    .step-two:hover
+    .step-two-button:hover
         opacity: 0.6
         background-color: #221e1e
-    .step-three:hover
+    .step-three-button:hover
         opacity: 0.6
         background-color: #221e1e
-    .step-four:hover
+    .step-four-button:hover
         opacity: 0.6
         background-color: #221e1e
-    .step-line-one
+    .step-one-milestone
         display: flex
         justify-content: center
         align-items: center
@@ -72,13 +75,13 @@
             height: 4px
             border: 2px solid #706363
             background-color: #5c5a45
-        #step-circle-one
+        #circle-one
             width: 10px
             height: 10px
             border: 2px solid #706363
             background-color: #5c5a45
             border-radius: 6px
-    .step-line-two
+    .step-two-milestone
         display: flex
         justify-content: center
         align-items: center
@@ -87,13 +90,13 @@
             height: 4px
             border: 2px solid #706363
             background-color: #5c5a45
-        #step-circle-two
+        #circle-two
             width: 10px
             height: 10px
             border: 2px solid #706363
             background-color: #5c5a45
             border-radius: 6px
-    .step-line-three
+    .step-three-milestone
         display: flex
         justify-content: center
         align-items: center
@@ -102,7 +105,7 @@
             height: 4px
             border: 2px solid #706363
             background-color: #5c5a45
-        #step-circle-three
+        #circle-three
             width: 10px
             height: 10px
             border: 2px solid #706363
@@ -113,26 +116,43 @@
         color: #ffffff
         width: 200px
         text-align: center
-        i
+        display: flex
+        justify-content: space-evenly
+        align-items: center
+        #next
             font-size: 45px
             cursor: pointer
-        i:hover
+        #next:hover
+            opacity: 0.6
+    .repeat-step
+        background-color: #443838
+        color: #ffffff
+        width: 200px
+        text-align: center
+        display: flex
+        justify-content: space-evenly
+        align-items: center
+        #repeat
+            border-radius: 30px
+            background-color: #ffffff
+            color: #443838
+            font-size: 30px
+            cursor: pointer
+            border: #ffffff solid 8px
+        #repeat:hover
             opacity: 0.6
 
 @media ( max-width:  800px)
     #register-steper
         margin-top: 60px
-        .step
+        .step-one-button, .step-two-button, .step-three-button, .step-four-button
             font-size: 12px
             width: 100px
-        .step-line-one
-            display: none
-        .step-line-two
-            display: none
-        .step-line-three
-            display: none
-        .step-line-four
+        .step-one-milestone, .step-two-milestone, .step-three-milestone, .step-four-milestone
             display: none
         .next-step
-            i
+            #next
                 font-size: 25px
+        .repeat-step
+            #repeat
+                font-size: 8px

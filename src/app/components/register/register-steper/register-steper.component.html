@@ -1,47 +1,53 @@
 <div id="register-steper">
-    <div class="step-one">
-      <h3>Paso 1</h3>
-      <p>Personal data</p>
-      <i class="far fa-check-circle" id="step-one-ico" [@step-one-two-ico]="stepPhase"></i>
+    <div class="repeat-step">
+      <i class="fas fa-redo-alt" id="repeat" (click) = "restartSteps()"></i>
     </div>
 
-    <div class="step-line-one">
-      <div id="step-circle-one" [@step-one-two-ico]="stepPhase"></div>
-      <div id="line-one" [@step-one-two-line]="stepPhase"></div>
-      <div id="step-circle-one" [@step-one-two-ico]="stepPhase"></div>
+    <div class="step-one-button">
+      <h3>Paso 1</h3>
+      <p>Main data</p>
+      <i class="far fa-check-circle" id="step-one-ico" [@stepOneBtnIco] = "stepOneBtnIcoState"></i>
+    </div>
+
+    <div class="step-one-milestone">
+      <div id="circle-one" [@stepOneMilestoneCircle]="stepOneMilestoneCircleState"></div>
+      <div id="line-one" [@stepOneMilestoneLine]="stepOneMilestoneLineState"></div>
+      <div id="circle-one" [@stepOneMilestoneCircle]="stepOneMilestoneCircleState"></div>
     </div>
     
-    <div class="step-two" [@step-two-init]="stepTwoButtonAnimation">
+    <div class="step-two-button" [@stepTwoBtn] = "stepTwoBtnState">
       <h3>Paso 2</h3>
       <p>Documentation</p>
-      <i class="far fa-check-circle" id="step-two-ico"></i>
+      <i class="far fa-check-circle" id="step-two-ico" [@stepTwoBtnIco]="stepTwoBtnIcoState"></i>
     </div>
     
-    <div class="step-line-two">
-      <div id="step-circle-two"></div>
-      <div id="line-two"></div>
-      <div id="step-circle-two"></div>
+    <div class="step-two-milestone">
+      <div id="circle-two" [@stepTwoMilestoneCircle] = "stepTwoMilestoneCircleState"></div>
+      <div id="line-two" [@stepTwoMilestoneLine] = "stepTwoMilestoneLineState"></div>
+      <div id="circle-two" [@stepTwoMilestoneCircle] = "stepTwoMilestoneCircleState"></div>
     </div>
     
-    <div class="step-three">
+    <div class="step-three-button" [@stepThreeBtn] = "stepThreeBtnState">
       <h3>Paso 3</h3>
       <p>Mail Confirm</p>
       <i class="far fa-check-circle" id="step-three-ico"></i>
     </div>
     
-    <div class="step-line-three">
-      <div id="step-circle-three"></div>
+    <div class="step-three-milestone">
+      <div id="circle-three"></div>
       <div id="line-three"></div>
-      <div id="step-circle-three"></div>
+      <div id="circle-three"></div>
     </div>
     
-    <div class="step-four">
+    <div class="step-four-button">
       <h3>Paso 4</h3>
       <p>Terms</p>
       <i class="far fa-check-circle" id="step-four-ico"></i>
     </div>
-    <div class="next-step" (click)=nextStep()>
-      <i class="fas fa-arrow-circle-right"></i>
+
+    <div class="next-step">
+      <i class="fas fa-arrow-circle-right" id="next" (click)=goToNextStep()></i>
     </div>
+
   </div>
   

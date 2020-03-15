@@ -9,12 +9,12 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Correo: </mat-label>
-      <input matInput placeholder="Ex. pabloeng05@gmail.com" [(ngModel)]="step2FormEmail">
+      <input matInput placeholder="Ex. pabloeng05@gmail.com" [(ngModel)]="step2FormEmail" (change)=updateFormFields()>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Número de teléfono: </mat-label>
-      <input matInput placeholder="Ex. 311-233-37-99" [(ngModel)]="step2FormPhoneNumber">
+      <input matInput placeholder="Ex. 311-233-37-99" [(ngModel)]="step2FormPhoneNumber" (change)=updateFormFields()>
     </mat-form-field>
 
   </div>
@@ -29,12 +29,12 @@
     <!--FIELD CARRERA-------------------------------------------------->
     <mat-form-field appearance="fill">
       <mat-label>Carrera: </mat-label>
-      <input matInput placeholder="Ex. Ing. Sistemas Computacionales" [(ngModel)]="step2FormCareer">
+      <input matInput placeholder="Ex. Ing. Sistemas Computacionales" [(ngModel)]="step2FormCareer" (change)=updateFormFields()>
     </mat-form-field>
     <!--FIELD GRADO ACADEMICO---------------------------------------------------->
     <mat-form-field appearance="fill">
       <mat-label>Grado academico: </mat-label>
-      <mat-select [(ngModel)]="step2FormStudyLevel">
+      <mat-select [(ngModel)]="step2FormCareerLevel" (change)=updateFormFields()>
         <mat-option *ngFor="let item of studyLevelList" [value]="item.value">
           {{item.viewValue}}
         </mat-option>
@@ -43,7 +43,7 @@
     <!--FIELD CATEGORIA---------------------------------------------------------->
     <mat-form-field appearance="fill">
       <mat-label>Categoria: </mat-label>
-      <mat-select [(ngModel)]="step2FormCategory">
+      <mat-select [(ngModel)]="step2FormCategory" (change)=updateFormFields()>
         <mat-option *ngFor="let item of categoryList" [value]="item.value">
           {{item.viewValue}}
         </mat-option>
@@ -52,7 +52,7 @@
     <!--FIELD AÑOS EXPERIENCIA--------------------------------------------------->
     <mat-form-field appearance="fill">
       <mat-label>Años de experiencia</mat-label>
-      <input matInput type="number" placeholder="Ex. 5" min="0" max="100" [(ngModel)]="step2FormExperience">
+      <input matInput type="number" placeholder="Ex. 5" min="0" max="100" [(ngModel)]="step2FormExperience" (change)=updateFormFields()>
     </mat-form-field>
     <!--CARD IDIOMAS--------------------------------------------------------------------------------->
     <div class="register-module-card-language">
@@ -62,18 +62,18 @@
       <div class="register-module-card-language-content">
         <div class="register-module-card-language-content-row">
           <mat-form-field appearance="fill">
-            <mat-select [(ngModel)]="selectedLanguage">
+            <mat-select [(ngModel)]="step2FormLanguage" (change)=updateFormFields()>
               <mat-option *ngFor="let item of languageList" [value]="item.value">
                 {{item.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <i class="fas fa-plus-square" (click)="deleteLanguageListItem()"></i>
+          <i class="fas fa-plus-square" (click)="addItemToLanguageList()"></i>
         </div>
 
         <div class="register-module-card-language-content-row">
           <mat-form-field appearance="fill">
-            <mat-select>
+            <mat-select [(ngModel)]="step2FormLanguageLevel" (change)=updateFormFields()>
               <mat-option *ngFor="let item of languageLevelList" [value]="item.value">
                 {{item.viewValue}}
               </mat-option>
