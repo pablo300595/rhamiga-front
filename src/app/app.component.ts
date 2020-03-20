@@ -11,8 +11,8 @@ import { trigger, style, state, transition, animate, keyframes } from '@angular/
   styleUrls: ['./app.component.sass'],
   animations: [
     trigger('introCard', [
-      state('init', style({ opacity: '1'})),
-      state('end', style({ opacity: '0'})),
+      state('init', style({ opacity: '1', zIndex: '120'})),
+      state('end', style({ opacity: '0', zIndex: '-5'})),
       transition('init => end', animate('600ms ease-out')),
       transition('end => init', animate('600ms ease-in'))
     ])
