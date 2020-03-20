@@ -1,4 +1,103 @@
-<div id="register-module">
+<div id="register">
+  <!------------------------------------BEGIN CARD USERDATA------------------------------------>
+  <div class="card">
+
+    <div class="card-header">
+      <h1>Datos de usuario</h1>
+      <i class="fas fa-user-shield"></i>
+    </div>
+
+    <div class="card-content">
+      <mat-form-field appearance="fill">
+        <mat-label>Usuario: </mat-label>
+        <input matInput placeholder="Ex. pabloeng05" [(ngModel)]="step1FormUsername" [formControl] ="usernameFormControl" (change)=updateFormFields() required>
+        <mat-error>{{getErrorMessageUsername()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Contraseña: </mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="step1FormPassword" [formControl] = "passwordFormControl" (change)=updateFormFields() required>
+        <mat-error>{{getErrorMessagePassword()}}</mat-error>
+        <!--<button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="Hide">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>-->
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Confirmar contraseña: </mat-label>
+        <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" [(ngModel)]="step1FormPasswordConfirm" [formControl]="passwordConfirmFormControl" (change)=updateFormFields() required>
+        <mat-error>{{getErrorMessagePasswordConfirm()}}</mat-error>
+        <!--<button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="Hide">
+          <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>-->
+      </mat-form-field>
+    </div>
+
+  </div>
+  <!------------------------------------END CARD USERDATA------------------------------------>
+  <div class="card">
+    <div class="card-header">
+      <h1>Datos personales</h1>
+      <i class="fas fa-info-circle"></i>
+    </div>
+    <div class="card-content">
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre(s): </mat-label>
+        <input matInput [type]="'text'" placeholder="Ex. Jesus Roberto" [(ngModel)]="step1FormFirstName" [formControl]="firstNameFormControl" (change)=updateFormFields() required>
+        <mat-error>{{getErrorMessageFirstName()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Apellidos: </mat-label>
+        <input matInput [type]="'text'" placeholder="Ex. Valencia Zavala" [(ngModel)]="step1FormLastName" [formControl]="lastNameFormControl" (change)=updateFormFields() required>
+        <mat-error>{{getErrorMessageLastName()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Edad: </mat-label>
+        <input matInput [type]="'number'" [min] = "'18'" [max] = "'100'" placeholder="Ex. 20" [(ngModel)]="step1FormAge" [formControl]="ageFormControl" (change)=updateFormFields() required>
+        <mat-error>{{getErrorMessageAge()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Sexo: </mat-label>
+        <mat-select [(ngModel)]="step1FormSex" (change)=updateFormFields()>
+          <mat-option *ngFor="let item of genderList" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>País de origen: </mat-label>
+        <mat-select [(ngModel)]="step1FormNationality" (change)=updateFormFields()>
+          <mat-option *ngFor="let item of countryList" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Estado: </mat-label>
+        <mat-select [(ngModel)]="step1FormState" (change)=updateFormFields()>
+          <mat-option *ngFor="let item of stateList" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ciudad: </mat-label>
+        <input matInput [type]="'text'" placeholder="Ex. Santa María del Oro" [(ngModel)]="step1FormCity" [formControl]="cityFormControl" (change)=updateFormFields() required>
+        <mat-error>{{getErrorMessageCity()}}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+</div>
+<!--<div id="register-module">
   <div class="register-user-data">
     <div class="card-title">
       <h1>Datos de usuario</h1>
@@ -38,4 +137,4 @@
     <input type="text" placeholder="..." [(ngModel)]="step1FormCity" (change)=updateFormFields()>
     
   </div>
-</div>
+</div>-->

@@ -18,6 +18,7 @@ export class StepOneService {
   step1FormNationality: BehaviorSubject<any>;
   step1FormState: BehaviorSubject<any>;
   step1FormCity: BehaviorSubject<any>;
+  isFormValid: BehaviorSubject<any>;
 
   currentStep1FormUsername: Observable<any>;
   currentStep1FormPassword: Observable<any>;
@@ -29,6 +30,7 @@ export class StepOneService {
   currentStep1FormNationality: Observable<any>;
   currentStep1FormState: Observable<any>;
   currentStep1FormCity: Observable<any>;
+  currentIsFormValid: Observable<any>;
 
   //Required Routes
   URL_USER: string;
@@ -52,6 +54,7 @@ export class StepOneService {
     this.step1FormNationality = new BehaviorSubject(localStorage.getItem('step1FormNationality'));
     this.step1FormState = new BehaviorSubject(localStorage.getItem('step1FormState'));
     this.step1FormCity = new BehaviorSubject(localStorage.getItem('step1FormCity'));
+    this.isFormValid = new BehaviorSubject(true);
 
     this.currentStep1FormUsername = this.step1FormUsername.asObservable();
     this.currentStep1FormPassword = this.step1FormPassword.asObservable();
@@ -63,6 +66,7 @@ export class StepOneService {
     this.currentStep1FormNationality = this.step1FormNationality.asObservable();
     this.currentStep1FormState = this.step1FormState.asObservable();
     this.currentStep1FormCity = this.step1FormCity.asObservable();
+    this.currentIsFormValid = this.isFormValid.asObservable();
   }
 
   initRequestRoutes() {
@@ -127,5 +131,9 @@ export class StepOneService {
   changeStep1FormCity(data) {
     localStorage.setItem('step1FormCity', data);
     this.step1FormCity.next(data);
+  }
+
+  changeStep1IsValid(data) {
+    this.isFormValid.next(data);
   }
 }

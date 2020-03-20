@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpEventType } from '@angular/common/http';
-import { NgForm, FormControl } from '@angular/forms';
+import { NgForm, FormControl, Validators } from '@angular/forms';
 // Services
 import { LocalstorageService } from './../../../services/localstorage/localstorage.service';
 import { StepTwoService } from './../../../services/localstorage/step-two/step-two.service';
@@ -40,7 +40,9 @@ export class RegisterStepTwoComponent implements OnInit {
   ];
   // Service variables
   step2FormEmail: string;
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   step2FormPhoneNumber: string;
+  phoneNumberFormControl = new FormControl('', [Validators.required]);
   step2FormCareer: string;
   step2FormCareerLevel: string;
   step2FormCategory: string;
@@ -133,5 +135,22 @@ export class RegisterStepTwoComponent implements OnInit {
       }
     }
   }
+  /* ERROR HANDLING:------------------------------------------------------
+      Los mecanismos siguientes se activan cuando el alguna validación se desencadena*/
+      getErrorMessageEmail() {
+        if(this.emailFormControl.hasError('email')){
+          this.stepTwoService.changeStep2IsValid(false);
+          return 'El email ingresado no es valido';
+        } else if(this.emailFormControl.hasError('required')) {
+          this.stepTwoService.changeStep2IsValid(false);
+          return 'Campo requerido';
+        } else return;
+      }
 
+      getErrorMessagePhoneNumber() {
+        if(this.phoneNumberFormControl.hasError('required')) {
+          this.stepTwoService.changeStep2IsValid(false);
+          return 'Campo requerido';
+        } else return;
+      }
 }

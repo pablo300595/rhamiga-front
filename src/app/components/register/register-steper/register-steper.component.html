@@ -3,7 +3,7 @@
       <i class="fas fa-redo-alt" id="repeat" (click) = "restartSteps()"></i>
     </div>
 
-    <div class="step-one-button">
+    <div class="step-one-button" (click)="restartToStep(1)">
       <h3>Paso 1</h3>
       <p>Main data</p>
       <i class="far fa-check-circle" id="step-one-ico" [@stepOneBtnIco] = "stepOneBtnIcoState"></i>
@@ -15,7 +15,7 @@
       <div id="circle-one" [@stepOneMilestoneCircle]="stepOneMilestoneCircleState"></div>
     </div>
     
-    <div class="step-two-button" [@stepTwoBtn] = "stepTwoBtnState">
+    <div class="step-two-button" [@stepTwoBtn] = "stepTwoBtnState" (click)="restartToStep(2)">
       <h3>Paso 2</h3>
       <p>Documentation</p>
       <i class="far fa-check-circle" id="step-two-ico" [@stepTwoBtnIco]="stepTwoBtnIcoState"></i>
@@ -27,7 +27,7 @@
       <div id="circle-two" [@stepTwoMilestoneCircle] = "stepTwoMilestoneCircleState"></div>
     </div>
     
-    <div class="step-three-button" [@stepThreeBtn] = "stepThreeBtnState">
+    <div class="step-three-button" [@stepThreeBtn] = "stepThreeBtnState" (click)="restartToStep(3)">
       <h3>Paso 3</h3>
       <p>Mail Confirm</p>
       <i class="far fa-check-circle" id="step-three-ico"></i>
@@ -39,7 +39,7 @@
       <div id="circle-three"></div>
     </div>
     
-    <div class="step-four-button">
+    <div class="step-four-button" (click)="restartToStep(4)">
       <h3>Paso 4</h3>
       <p>Terms</p>
       <i class="far fa-check-circle" id="step-four-ico"></i>

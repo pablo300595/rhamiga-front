@@ -15,6 +15,7 @@ export class StepTwoService {
   step2FormLanguageLevel: BehaviorSubject<any>;
   step2FormAllLanguages: BehaviorSubject<any>;
   step2DropzoneCurriculum: BehaviorSubject<any>;
+  isFormValid: BehaviorSubject<any>;
 
   currentStep2FormEmail: Observable<any>;
   currentStep2FormPhoneNumber: Observable<any>;
@@ -26,6 +27,7 @@ export class StepTwoService {
   currentStep2FormLanguageLevel: Observable<any>;
   currentStep2FormAllLanguages: Observable<any>;
   currentStep2DropzoneCurriculum: Observable<any>;
+  currentIsFormValid: Observable<any>;
 
   constructor() { 
     this.initServiceVariables();
@@ -42,6 +44,7 @@ export class StepTwoService {
     this.step2FormLanguageLevel = new BehaviorSubject(localStorage.getItem('step2FormLanguageLevel'));
     this.step2FormAllLanguages = new BehaviorSubject(localStorage.getItem('step2FormAllLanguages'));
     this.step2DropzoneCurriculum = new BehaviorSubject(localStorage.getItem('step2DropzoneCurriculum'));
+    this.isFormValid = new BehaviorSubject(true);
     
     this.currentStep2FormEmail = this.step2FormEmail.asObservable();
     this.currentStep2FormPhoneNumber = this.step2FormPhoneNumber.asObservable();
@@ -53,6 +56,7 @@ export class StepTwoService {
     this.currentStep2FormLanguageLevel = this.step2FormLanguageLevel.asObservable();
     this.currentStep2FormAllLanguages = this.step2FormAllLanguages.asObservable();
     this.currentStep2DropzoneCurriculum = this.step2DropzoneCurriculum.asObservable();
+    this.currentIsFormValid = this.isFormValid.asObservable();
   }
   /* CHANGE METHODS ------------------------------------------------------------ */
   changeStep2FormEmail(data){
@@ -103,5 +107,9 @@ export class StepTwoService {
   changeStep2DropzoneCurriculum(data){
     localStorage.setItem('step2DropzoneCurriculum', data);
     this.step2DropzoneCurriculum.next(data);
+  }
+
+  changeStep2IsValid(data) {
+    this.isFormValid.next(data);
   }
 }

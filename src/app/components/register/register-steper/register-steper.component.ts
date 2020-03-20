@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material';
 import { LocalstorageService } from '../../../services/localstorage/localstorage.service';
 import { StepOneService } from '../../../services/localstorage/step-one/step-one.service';
 import { StepTwoService } from './../../../services/localstorage/step-two/step-two.service';
+import { SteperService } from './../../../services/localstorage/steper/steper.service';
 import { UserService } from './../../../services/http-request/user/user.service';
 import { NotificationService } from './../../../services/notifications/notification.service';
 import { CandidateService } from './../../../services/http-request/candidate/candidate.service';
@@ -18,56 +19,56 @@ import { CandidateService } from './../../../services/http-request/candidate/can
   styleUrls: ['./register-steper.component.sass'],
   animations: [
     trigger('stepOneBtnIco', [
-      state('show', style({opacity: '1', backgroundColor: 'green'})),
-      state('hide', style({opacity: '0.2', backgroundColor: 'red'})),
+      state('show', style({ opacity: '1', backgroundColor: 'green' })),
+      state('hide', style({ opacity: '0.2', backgroundColor: 'red' })),
       transition('show => hide', animate('600ms ease-out')),
       transition('hide => show', animate('600ms ease-in'))
     ]),
     trigger('stepOneMilestoneLine', [
-      state('locked', style({border: '2px solid #706363', backgroundColor: '#5c5a45'})),
-      state('unlocked', style({border: '2px solid #ffffff', backgroundColor: '#ffffff'})),
+      state('locked', style({ border: '2px solid #706363', backgroundColor: '#5c5a45' })),
+      state('unlocked', style({ border: '2px solid #ffffff', backgroundColor: '#ffffff' })),
       transition('locked => unlocked', animate('600ms ease-out')),
       transition('unlocked => locked', animate('600ms ease-in'))
     ]),
     trigger('stepOneMilestoneCircle', [
-      state('locked', style({border: '2px solid #706363', backgroundColor: '#5c5a45'})),
-      state('unlocked', style({border: '2px solid #ffffff', backgroundColor: '#ffffff'})),
+      state('locked', style({ border: '2px solid #706363', backgroundColor: '#5c5a45' })),
+      state('unlocked', style({ border: '2px solid #ffffff', backgroundColor: '#ffffff' })),
       transition('locked => unlocked', animate('600ms ease-out')),
       transition('unlocked => locked', animate('600ms ease-in'))
     ]),
     trigger('stepTwoBtn', [
-      state('locked', style({opacity: 0.4})),
-      state('unlocked', style({opacity: 1})),
+      state('locked', style({ opacity: 0.4 })),
+      state('unlocked', style({ opacity: 1 })),
       transition('locked => unlocked', animate('600ms ease-out')),
       transition('unlocked => locked', animate('600ms ease-in'))
     ]),
     trigger('stepTwoBtnIco', [
-      state('show', style({opacity: '1', backgroundColor: 'green'})),
-      state('hide', style({opacity: '0.2', backgroundColor: 'red'})),
+      state('show', style({ opacity: '1', backgroundColor: 'green' })),
+      state('hide', style({ opacity: '0.2', backgroundColor: 'red' })),
       transition('show => hide', animate('600ms ease-out')),
       transition('hide => show', animate('600ms ease-in'))
     ]),
     trigger('stepTwoMilestoneLine', [
-      state('locked', style({border: '2px solid #706363', backgroundColor: '#5c5a45'})),
-      state('unlocked', style({border: '2px solid #ffffff', backgroundColor: '#ffffff'})),
+      state('locked', style({ border: '2px solid #706363', backgroundColor: '#5c5a45' })),
+      state('unlocked', style({ border: '2px solid #ffffff', backgroundColor: '#ffffff' })),
       transition('locked => unlocked', animate('600ms ease-out')),
       transition('unlocked => locked', animate('600ms ease-in'))
     ]),
     trigger('stepTwoMilestoneCircle', [
-      state('locked', style({border: '2px solid #706363', backgroundColor: '#5c5a45'})),
-      state('unlocked', style({border: '2px solid #ffffff', backgroundColor: '#ffffff'})),
+      state('locked', style({ border: '2px solid #706363', backgroundColor: '#5c5a45' })),
+      state('unlocked', style({ border: '2px solid #ffffff', backgroundColor: '#ffffff' })),
       transition('locked => unlocked', animate('600ms ease-out')),
       transition('unlocked => locked', animate('600ms ease-in'))
     ]),
     trigger('stepThreeBtn', [
-      state('locked', style({opacity: 0.4})),
-      state('unlocked', style({opacity: 1})),
+      state('locked', style({ opacity: 0.4 })),
+      state('unlocked', style({ opacity: 1 })),
       transition('locked => unlocked', animate('600ms ease-out')),
       transition('unlocked => locked', animate('600ms ease-in'))
     ]),
     trigger('stepThreeBtnIco', [
-      state('show', style({opacity: '1', backgroundColor: 'green'})),
-      state('hide', style({opacity: '0.2', backgroundColor: 'red'})),
+      state('show', style({ opacity: '1', backgroundColor: 'green' })),
+      state('hide', style({ opacity: '0.2', backgroundColor: 'red' })),
       transition('show => hide', animate('600ms ease-out')),
       transition('hide => show', animate('600ms ease-in'))
     ]),
@@ -85,6 +86,7 @@ export class RegisterSteperComponent implements OnInit {
   step1FormNationality: string;
   step1FormState: string;
   step1FormCity: string;
+  step1IsFormValid: boolean;
 
   step2FormEmail: string;
   step2FormPhoneNumber: string;
@@ -95,6 +97,7 @@ export class RegisterSteperComponent implements OnInit {
   step2FormLanguage: string;
   step2FormLanguageLevel: string;
   step2FormAllLanguages: Array<any>;
+  step2IsFormValid: boolean;
   //Validation Flags
   bothPasswordsAreEqual: boolean;
   //Animation Flags
@@ -107,15 +110,17 @@ export class RegisterSteperComponent implements OnInit {
   stepTwoMilestoneCircleState: string;
   stepThreeBtnState: string;
   stepThreeBtnIcoState: string;
+  //Reset Flag
+  stepToReturn: String;
   /* INIT MECHANISMS:---------------------------------------------------------------------
     Son las primeras funciones en ejecurse cuando se manda a llamar el componente
     register-steper.component.ts----------------------------------------------------------*/
   constructor(private storage: LocalstorageService, private stepOneService: StepOneService,
-    private stepTwoService: StepTwoService, private userService: UserService, 
+    private stepTwoService: StepTwoService, private userService: UserService,
     private candidateService: CandidateService, public dialog: MatDialog,
-    private notification: NotificationService) {
+    private notification: NotificationService, public steper: SteperService) {
     this.initServiceFormFields();
-    this.animateDefaultValues();
+    //this.animateDefaultValues();
     this.animateSteperAccordingToCurrentPhase();
   }
 
@@ -133,6 +138,7 @@ export class RegisterSteperComponent implements OnInit {
     this.stepOneService.currentStep1FormNationality.subscribe(res => this.step1FormNationality = res);
     this.stepOneService.currentStep1FormState.subscribe(res => this.step1FormState = res);
     this.stepOneService.currentStep1FormCity.subscribe(res => this.step1FormCity = res);
+    this.stepOneService.currentIsFormValid.subscribe(res => this.step1IsFormValid = res);
 
     this.stepTwoService.currentStep2FormEmail.subscribe(res => this.step2FormEmail = res);
     this.stepTwoService.currentStep2FormPhoneNumber.subscribe(res => this.step2FormPhoneNumber = res);
@@ -143,6 +149,19 @@ export class RegisterSteperComponent implements OnInit {
     this.stepTwoService.currentStep2FormLanguage.subscribe(res => this.step2FormLanguage = res);
     this.stepTwoService.currentStep2FormLanguageLevel.subscribe(res => this.step2FormLanguageLevel = res);
     this.stepTwoService.currentStep2FormAllLanguages.subscribe(res => this.step2FormAllLanguages = res);
+    this.stepTwoService.currentIsFormValid.subscribe(res => this.step2IsFormValid = res);
+
+    this.steper.currentStepOneBtnIcoState.subscribe(res => this.stepOneBtnIcoState = res);
+    this.steper.currentStepOneMilestoneLineState.subscribe(res => this.stepOneMilestoneLineState = res);
+    this.steper.currentStepOneMilestoneCircleState.subscribe(res => this.stepOneMilestoneCircleState = res);
+    this.steper.currentStepTwoBtnState.subscribe(res => this.stepTwoBtnState = res);
+    this.steper.currentStepTwoBtnIcoState.subscribe(res => this.stepTwoBtnIcoState = res);
+    this.steper.currentStepTwoMilestoneLineState.subscribe(res => this.stepTwoMilestoneLineState = res);
+    this.steper.currentStepTwoMilestoneCircleState.subscribe(res => this.stepTwoMilestoneCircleState = res);
+    this.steper.currentStepThreeBtnState.subscribe(res => this.stepThreeBtnState = res);
+    this.steper.currentStepThreeBtnIcoState.subscribe(res => this.stepThreeBtnIcoState = res);
+
+
   }
 
   animateSteperAccordingToCurrentPhase() {
@@ -175,43 +194,23 @@ export class RegisterSteperComponent implements OnInit {
   }
   /* ANIMATION CHANGE STATES:------------------------------------------------------
     Los mecanismos siguientes permiten cambiar el estado de animación de cada componente*/
-  animateDefaultValues(){
-    this.stepOneBtnIcoState = 'hide';
-    this.stepOneMilestoneLineState = 'locked';
-    this.stepOneMilestoneCircleState = 'locked';
-    this.stepTwoBtnState = 'locked';
-    this.stepTwoBtnIcoState = 'hide'
-    this.stepTwoMilestoneLineState = 'locked';
-    this.stepTwoMilestoneCircleState = 'locked';
-    this.stepThreeBtnState = 'locked';
-    this.stepThreeBtnIcoState= 'hide';
+
+  animatePhaseTwoInitState() {
+    this.steper.changeStepOneBtnIcoState('show');
+    this.steper.changeStepOneMilestoneLineState('unlocked');
+    this.steper.changeStepOneMilestoneCircleState('unlocked');
+    this.steper.changeStepTwoBtnState('unlocked');
   }
 
-  /*animatePhaseOneInitState() {
-    this.stepOneBtnIcoState = 'hide';
-    this.stepOneMilestoneLineState = 'locked';
-    this.stepOneMilestoneCircleState = 'locked';
-    this.stepTwoBtnState = 'locked';
-    this.stepTwoBtnIcoState = 'hide'
-  }*/
-
-  animatePhaseTwoInitState(){
-    // this.stepTwoBtnIcoState = 'hide'
-    this.stepOneBtnIcoState = 'show';
-    this.stepOneMilestoneLineState = 'unlocked';
-    this.stepOneMilestoneCircleState = 'unlocked';
-    this.stepTwoBtnState = 'unlocked';
-  }
-
-  animatePhaseThreeInitState(){
-    this.stepOneBtnIcoState = 'show';
-    this.stepOneMilestoneLineState = 'unlocked';
-    this.stepOneMilestoneCircleState = 'unlocked';
-    this.stepTwoBtnState = 'unlocked';
-    this.stepTwoBtnIcoState = 'show';
-    this.stepTwoMilestoneLineState = 'unlocked';
-    this.stepTwoMilestoneCircleState = 'unlocked';
-    this.stepThreeBtnState = 'unlocked';
+  animatePhaseThreeInitState() {
+    this.steper.changeStepOneBtnIcoState('show');
+    this.steper.changeStepOneMilestoneLineState('unlocked');
+    this.steper.changeStepOneMilestoneCircleState('unlocked');
+    this.steper.changeStepTwoBtnState('unlocked');
+    this.steper.changeStepTwoBtnIcoState('show');
+    this.steper.changeStepTwoMilestoneLineState('unlocked');
+    this.steper.changeStepTwoMilestoneCircleState('unlocked');
+    this.steper.changeStepThreeBtnState('unlocked');
   }
 
   /* PHASE VALIDATION:------------------------------------------------------
@@ -230,8 +229,8 @@ export class RegisterSteperComponent implements OnInit {
       "sex": this.step1FormSex
     }
 
-    if (this.isThereAnyNullValue()) {
-      this.notification.warn('¡Error, hay campos obligatorios que no han sido llenados!');
+    if (!this.step1IsFormValid) {
+      this.notification.warn('¡Error, hay campos obligatorios que no han sido llenados o no cumplen con las reglas !');
       return;
     }
     //Call-order-> 1)getUserByUsername,2)createCandidate,3)findCandidateId,4)createUser
@@ -290,6 +289,12 @@ export class RegisterSteperComponent implements OnInit {
       "resume": 'void',
       "status": "pending"
     }
+
+    if (!this.step2IsFormValid) {
+      this.notification.warn('¡Error, hay campos obligatorios que no han sido llenados o no cumplen con las reglas !');
+      return;
+    }
+    
     // FindCandidateId -----------------------------------------------------------------
     this.candidateService.findCandidateId(candidate).subscribe(res => {
       // UpdateCandidate -----------------------------------------------------------------
@@ -307,32 +312,37 @@ export class RegisterSteperComponent implements OnInit {
   restartSteps() {
     let dialogRef = this.dialog.open(RepeatStepDialogComponent, {
       width: '300px',
-      data: { name: 'this.name', animal: 'this.animal' }
+      data: { step: 0 }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('');
+    });
+  }
+
+  restartToStep(step){
+    let stepMap = new Map();
+    stepMap.set('one', 1);
+    stepMap.set('two', 2);
+    stepMap.set('three', 3);
+    stepMap.set('four', 4);
+    if(stepMap.get(this.stepPhase)< step) {
+      this.notification.warn('No es posible regresar a un paso posterior');
+      return;
+    }
+    let dialogRef = this.dialog.open(RepeatStepDialogComponent, {
+      width: '300px',
+      data: { step: step }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('');
     });
   }
 
   /* GENERIC VALIDATION METHODS:-------------------------------------------------------------
     Son métodos genericos que realizan validaciones rapidas en otras functiones del código.*/
 
-  /* Determina si existe por lo menos un campo con valor Null o texto vacío ''.
-    Usado por: validateStep1(),*/
-  isThereAnyNullValue() {
-    return (this.step1FormUsername == '' || this.step1FormUsername == null ||
-      this.step1FormPassword == '' || this.step1FormPassword == null ||
-      this.step1FormPasswordConfirm == '' || this.step1FormPasswordConfirm == null ||
-      this.step1FormFirstName == '' || this.step1FormFirstName == null ||
-      this.step1FormLastName == '' || this.step1FormLastName == null ||
-      this.step1FormAge == '' || this.step1FormAge == null ||
-      this.step1FormSex == '' || this.step1FormSex == null ||
-      this.step1FormNationality == '' || this.step1FormNationality == null ||
-      this.step1FormState == '' || this.step1FormState == null ||
-      this.step1FormCity == '' || this.step1FormCity == null
-    );
-  }
 }
 
 

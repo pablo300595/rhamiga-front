@@ -9,12 +9,14 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Correo: </mat-label>
-      <input matInput placeholder="Ex. pabloeng05@gmail.com" [(ngModel)]="step2FormEmail" (change)=updateFormFields()>
+      <input matInput placeholder="Ex. pabloeng05@gmail.com" [(ngModel)]="step2FormEmail" [formControl] ="emailFormControl" (change)=updateFormFields() required>
+      <mat-error>{{getErrorMessageEmail()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Número de teléfono: </mat-label>
-      <input matInput placeholder="Ex. 311-233-37-99" [(ngModel)]="step2FormPhoneNumber" (change)=updateFormFields()>
+      <input matInput placeholder="Ex. 311-233-37-99" [(ngModel)]="step2FormPhoneNumber" [formControl] ="phoneNumberFormControl" (change)=updateFormFields() required>
+      <mat-error>{{getErrorMessagePhoneNumber()}}</mat-error>
     </mat-form-field>
 
   </div>
