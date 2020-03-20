@@ -19,7 +19,7 @@
         <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="step1FormPassword" [formControl] = "passwordFormControl" (change)=updateFormFields() required>
         <mat-error>{{getErrorMessagePassword()}}</mat-error>
         <!--<button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="Hide">
+          [attr.aria-pressed]="hide">
           <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>-->
       </mat-form-field>
@@ -29,7 +29,7 @@
         <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" [(ngModel)]="step1FormPasswordConfirm" [formControl]="passwordConfirmFormControl" (change)=updateFormFields() required>
         <mat-error>{{getErrorMessagePasswordConfirm()}}</mat-error>
         <!--<button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="Hide">
+          [attr.aria-pressed]="hide">
           <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>-->
       </mat-form-field>

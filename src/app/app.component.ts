@@ -3,17 +3,30 @@ import { LocalstorageService } from './services/localstorage/localstorage.servic
 import { StepOneService } from './services/localstorage/step-one/step-one.service';
 import { StepTwoService } from './services/localstorage/step-two/step-two.service';
 import { SteperService } from './services/localstorage/steper/steper.service';
+import { trigger, style, state, transition, animate, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  styleUrls: ['./app.component.sass'],
+  animations: [
+    trigger('introCard', [
+      state('init', style({ opacity: '1'})),
+      state('end', style({ opacity: '0'})),
+      transition('init => end', animate('600ms ease-out')),
+      transition('end => init', animate('600ms ease-in'))
+    ])
+  ]
 })
 export class AppComponent {
   title = 'rhamiga-front';
+  introCardState: string;
+
   constructor(private storage: LocalstorageService, private stepOneService: StepOneService,
     private stepTwoService: StepTwoService, private steper: SteperService) {
     this.initGlobalValuesIfNull();
+    this.introCardState='init';
+    setTimeout(()=>{this.introCardState='end'},4000);
   }
 
   onActivate(event) {
