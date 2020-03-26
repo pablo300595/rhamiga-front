@@ -19,7 +19,7 @@ import { trigger, style, state, transition, animate, keyframes } from '@angular/
   ]
 })
 export class AppComponent {
-  title = 'rhamiga-front';
+  title = 'Mirval Services';
   introCardState: string;
 
   constructor(private storage: LocalstorageService, private stepOneService: StepOneService,

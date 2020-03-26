@@ -5,21 +5,28 @@
 <div id="bar"></div>
 
 <div id="login-section">
-  <div class="login-image">
+  <div class="login-image" [@loginCard]="loginCardState">
     <h1>Iniciar Sesión</h1>
   </div>
-  <div class="login-card">
-    <!--<i class="fas fa-user-circle ico"></i>
-    <h1>Member Login</h1>-->
-    <mat-form-field appearance="outline">
-      <mat-label>Usuario: </mat-label>
-      <input matInput placeholder="Ex. pabloeng05" [(ngModel)]="username">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Contraseña: </mat-label>
-      <input matInput [type]="'password'" placeholder="Ex. pabloeng05" [(ngModel)]="password">
-    </mat-form-field>
-    <input (click)="authUser()" id="auth" type="button" value="Sign in">
+  <div class="login-card" [@loginCard]="loginCardState">
+    
+    <div class="login-card-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Usuario: </mat-label>
+        <input matInput placeholder="Ex. pabloeng05" [(ngModel)]="username">
+        <mat-icon matSuffix>account_box</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="login-card-field">
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña: </mat-label>
+        <input matInput [type]="'password'" placeholder="Ex. 1234567890" [(ngModel)]="password">
+        <mat-icon matSuffix>vpn_key</mat-icon>
+      </mat-form-field>
+    </div>
+    
+    <input (click)="authUser()" id="auth" type="button" value="Acceder">
     <p id="password-forgotten" [routerLink]="['/register']">¿Sin cuenta? crear una</p>
   </div>
 </div>

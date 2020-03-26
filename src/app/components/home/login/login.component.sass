@@ -5,6 +5,7 @@
     position: fixed
     justify-content: center
     align-items: center
+    z-index: 300
 
 #bar
     width: 100%
@@ -12,26 +13,34 @@
     background-color: #1202f3
 
 #login-section
+    z-index: 200
     width: 100%
     background-color: #d8c5c5
-    background: linear-gradient(#e66465, #9198e5)
+    background: linear-gradient(#3c16e7, #9198e5)
     height: 452px //500
     display: flex
     flex-direction: column
     justify-content: center
     align-items: center
     .login-image
+        box-shadow: 5px 10px 8px 10px #1a1818
         display: flex
         flex-direction: column
         justify-content: center
         align-items: center
-        background-image: url('https://novaresidencia.000webhostapp.com/imagenes/backgrounds/background-blur-clean-531880.jpg')
+        background-color: #111111
+        background-image: url('https://novaresidencia.000webhostapp.com/imagenes/backgrounds/macbook-pro.jpg')
+        background-size: 230px 140px
+        background-repeat: no-repeat
+        background-position: center
         width: 300px
         height: 140px
         h1
             font-family: 'Oswald', sans-serif
             color: #ffffff
+            text-shadow: 2px 2px #000000
     .login-card
+        box-shadow: 5px 10px 8px 10px #1a1818
         background-color: #dddee7
         background: linear-gradient(#f0e0e0, #ebedf7)
         border-radius: 0px
@@ -41,13 +50,14 @@
         flex-direction: column
         justify-content: flex-start
         align-items: center
-        .ico
-            font-size: 40px
-            color: #2196f3
-        .mat-form-field
+        .login-card-field
+            display: flex
+            align-items: center
+            justify-content: space-around
             width: 80%
-            margin: 0
-            font-family: 'Oswald', sans-serif
+            .mat-form-field
+                margin: 0
+                font-family: 'Oswald', sans-serif
         #auth
             margin-bottom: 10px
             margin-right: 10%
@@ -56,9 +66,12 @@
             font-family: 'Oswald', sans-serif
             font-size: 20px
             width: 80%
+        #auth:hover
+            background-color: #110f0f 
+            color: #e6e3e3
         #password-forgotten
             background-color: #917777
-            padding: 5px 60px 5px 60px 
+            padding: 5px 60px 5px 60px
             font-family: 'Oswald', sans-serif
             font-size: 20px
             cursor: pointer
@@ -72,9 +85,3 @@
     #login-section
         flex-direction: column
         margin-top: 0px
-
-
-    
-
-        
-        
