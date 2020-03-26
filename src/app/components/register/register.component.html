@@ -1,4 +1,7 @@
 <app-register-steper></app-register-steper>
+<div id="loading" *ngIf="!hideLoading">
+    <object type="image/svg+xml" data="https://novaresidencia.000webhostapp.com/imagenes/tilesets/Spinner.svg"></object>
+</div>
 <app-register-step-one *ngIf="stepPhase=='one'"></app-register-step-one>
 <app-register-step-two *ngIf="stepPhase=='two'"></app-register-step-two>
 <app-register-step-three *ngIf="stepPhase=='three'"></app-register-step-three>

@@ -41,6 +41,7 @@ import { RegisterStepTwoComponent } from './components/register/register-step-tw
 import { RegisterStepThreeComponent } from './components/register/register-step-three/register-step-three.component';
 import { RegisterStepFourComponent } from './components/register/register-step-four/register-step-four.component';
 import { RepeatStepDialogComponent } from './components/register/register-steper/modals/repeat-step-dialog/repeat-step-dialog.component';
+import { ContractCardComponent } from './components/register/register-step-three/contract-card/contract-card.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { RepeatStepDialogComponent } from './components/register/register-steper
     RegisterStepTwoComponent,
     RegisterStepThreeComponent,
     RegisterStepFourComponent,
-    RepeatStepDialogComponent
+    RepeatStepDialogComponent,
+    ContractCardComponent
   ],
   imports: [
     BrowserModule,

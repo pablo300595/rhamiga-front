@@ -31,6 +31,7 @@ export class StepOneService {
   currentStep1FormState: Observable<any>;
   currentStep1FormCity: Observable<any>;
   currentIsFormValid: Observable<any>;
+  currentHideLoading: Observable<any>;
 
   //Required Routes
   URL_USER: string;

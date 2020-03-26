@@ -31,7 +31,8 @@
     <!--FIELD CARRERA-------------------------------------------------->
     <mat-form-field appearance="fill">
       <mat-label>Carrera: </mat-label>
-      <input matInput placeholder="Ex. Ing. Sistemas Computacionales" [(ngModel)]="step2FormCareer" (change)=updateFormFields()>
+      <input matInput placeholder="Ex. Ing. Sistemas Computacionales" [(ngModel)]="step2FormCareer" [formControl] ="careerFormControl" (change)=updateFormFields()>
+      <mat-error>{{getErrorMessageCareer()}}</mat-error>
     </mat-form-field>
     <!--FIELD GRADO ACADEMICO---------------------------------------------------->
     <mat-form-field appearance="fill">
@@ -54,7 +55,8 @@
     <!--FIELD AÑOS EXPERIENCIA--------------------------------------------------->
     <mat-form-field appearance="fill">
       <mat-label>Años de experiencia</mat-label>
-      <input matInput type="number" placeholder="Ex. 5" min="0" max="100" [(ngModel)]="step2FormExperience" (change)=updateFormFields()>
+      <input matInput type="number" placeholder="Ex. 5" min="0" max="100" [(ngModel)]="step2FormExperience" [formControl] ="experienceFormControl" (change)=updateFormFields()>
+      <mat-error>{{getErrorMessageExperience()}}</mat-error>
     </mat-form-field>
     <!--CARD IDIOMAS--------------------------------------------------------------------------------->
     <div class="register-module-card-language">

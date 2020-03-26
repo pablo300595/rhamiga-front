@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+// Services
+import { RegisterService } from '../../services/localstorage/register/register.service';
 import { LocalstorageService } from './../../services/localstorage/localstorage.service';
 
 @Component({
@@ -7,12 +9,11 @@ import { LocalstorageService } from './../../services/localstorage/localstorage.
   styleUrls: ['./register.component.sass']
 })
 export class RegisterComponent implements OnInit {
+  hideLoading: boolean;
   stepPhase: string;
-  constructor(private storage: LocalstorageService) { 
-    storage.currentStepPhase.subscribe(res => {
-      this.stepPhase = res;
-      if(res==null) this.storage.changeStepPhase(localStorage.getItem('stepPhase'));
-    });
+  constructor(private register: RegisterService, private storage: LocalstorageService) { 
+    register.currentHideLoading.subscribe(res => this.hideLoading = res);
+    storage.currentStepPhase.subscribe(res => this.stepPhase = res);
   }
 
   ngOnInit() {

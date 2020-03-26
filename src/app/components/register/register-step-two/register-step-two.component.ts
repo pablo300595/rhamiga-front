@@ -44,9 +44,11 @@ export class RegisterStepTwoComponent implements OnInit {
   step2FormPhoneNumber: string;
   phoneNumberFormControl = new FormControl('', [Validators.required]);
   step2FormCareer: string;
+  careerFormControl = new FormControl('', [Validators.required]);
   step2FormCareerLevel: string;
   step2FormCategory: string;
   step2FormExperience: Number;
+  experienceFormControl = new FormControl('', [Validators.required, Validators.min(0), Validators.max(80)]);
   step2FormLanguage: string;
   step2FormLanguageLevel: string;
   step2FormAllLanguages: Array<any>;
@@ -58,8 +60,7 @@ export class RegisterStepTwoComponent implements OnInit {
   /* INIT MECHANISMS:---------------------------------------------------------------------
     Son las primeras funciones en ejecurse cuando se manda a llamar el componente
     register-steper.component.ts----------------------------------------------------------*/
-  constructor(private storage: LocalstorageService, private stepTwoService: StepTwoService,
-    private files: FilesService) {
+  constructor(private stepTwoService: StepTwoService, private files: FilesService) {
     this.resetLanguageList();
     this.initServiceFormFields();
     this.stepTwoService.changeStep2DropzoneCurriculum(false);
@@ -92,6 +93,7 @@ export class RegisterStepTwoComponent implements OnInit {
       Los mecanismos siguientes representan la funcionalidad principal del componente*/
   uploadFile() {
     this.stepTwoService.changeStep2DropzoneCurriculum(true);
+    this.updateFormFields();
     this.files.uploadFile(this.selectedFile, 'curriculum.pdf').subscribe(event => {
       if (event.type == HttpEventType.UploadProgress) {
         this.selectedFileProgress = Math.round(event.loaded / event.total * 100);
@@ -102,7 +104,7 @@ export class RegisterStepTwoComponent implements OnInit {
     });
   }
 
-  updateFormFields(){
+  updateFormFields() {
     this.stepTwoService.changeStep2FormEmail(this.step2FormEmail);
     this.stepTwoService.changeStep2FormPhoneNumber(this.step2FormPhoneNumber);
     this.stepTwoService.changeStep2FormCareer(this.step2FormCareer);
@@ -112,6 +114,7 @@ export class RegisterStepTwoComponent implements OnInit {
     this.stepTwoService.changeStep2FormLanguage(this.step2FormLanguage);
     this.stepTwoService.changeStep2FormLanguageLevel(this.step2FormLanguageLevel);
     this.stepTwoService.changeStep2FormAllLanguages(this.step2FormAllLanguages);
+    this.verifyIfNoFormErrors();
   }
 
   resetLanguageList() {
@@ -137,20 +140,47 @@ export class RegisterStepTwoComponent implements OnInit {
   }
   /* ERROR HANDLING:------------------------------------------------------
       Los mecanismos siguientes se activan cuando el alguna validación se desencadena*/
-      getErrorMessageEmail() {
-        if(this.emailFormControl.hasError('email')){
-          this.stepTwoService.changeStep2IsValid(false);
-          return 'El email ingresado no es valido';
-        } else if(this.emailFormControl.hasError('required')) {
-          this.stepTwoService.changeStep2IsValid(false);
-          return 'Campo requerido';
-        } else return;
-      }
+  getErrorMessageEmail() {
+    if (this.emailFormControl.hasError('email')) {
+      this.stepTwoService.changeStep2IsValid(false);
+      return 'El email ingresado no es valido';
+    } else if (this.emailFormControl.hasError('required')) {
+      this.stepTwoService.changeStep2IsValid(false);
+      return 'Campo requerido';
+    } else return;
+  }
 
-      getErrorMessagePhoneNumber() {
-        if(this.phoneNumberFormControl.hasError('required')) {
-          this.stepTwoService.changeStep2IsValid(false);
-          return 'Campo requerido';
-        } else return;
-      }
+  getErrorMessagePhoneNumber() {
+    if (this.phoneNumberFormControl.hasError('required')) {
+      this.stepTwoService.changeStep2IsValid(false);
+      return 'Campo requerido';
+    } else return;
+  }
+
+  getErrorMessageCareer() {
+    if (this.careerFormControl.hasError('required')) {
+      this.stepTwoService.changeStep2IsValid(false);
+      return 'Campo requerido';
+    } else return;
+  }
+
+  getErrorMessageExperience() {
+    if(this.experienceFormControl.hasError('required')){
+      this.stepTwoService.changeStep2IsValid(false);
+      return 'Campo requerido';
+    } else if(this.experienceFormControl.hasError('min')) {
+      this.stepTwoService.changeStep2IsValid(false);
+      return 'El número mínimo es 0';
+    } else if(this.experienceFormControl.hasError('max')) {
+      this.stepTwoService.changeStep2IsValid(false);
+      return 'El número máximo es 80';
+    } else return;
+  }
+
+  verifyIfNoFormErrors(){
+    if(this.emailFormControl.invalid||this.phoneNumberFormControl.invalid||this.careerFormControl.invalid
+      ||this.experienceFormControl.invalid||this.step2DropzoneCurriculum==false) 
+      this.stepTwoService.changeStep2IsValid(false);
+    else this.stepTwoService.changeStep2IsValid(true);
+  }
 }

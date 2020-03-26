@@ -5,6 +5,7 @@ import { RepeatStepDialogComponent } from './modals/repeat-step-dialog/repeat-st
 // Material
 import { MatDialog } from '@angular/material';
 // Services
+import { RegisterService } from '../../../services/localstorage/register/register.service';
 import { LocalstorageService } from '../../../services/localstorage/localstorage.service';
 import { StepOneService } from '../../../services/localstorage/step-one/step-one.service';
 import { StepTwoService } from './../../../services/localstorage/step-two/step-two.service';
@@ -115,10 +116,11 @@ export class RegisterSteperComponent implements OnInit {
   /* INIT MECHANISMS:---------------------------------------------------------------------
     Son las primeras funciones en ejecurse cuando se manda a llamar el componente
     register-steper.component.ts----------------------------------------------------------*/
-  constructor(private storage: LocalstorageService, private stepOneService: StepOneService,
-    private stepTwoService: StepTwoService, private userService: UserService,
-    private candidateService: CandidateService, public dialog: MatDialog,
-    private notification: NotificationService, public steper: SteperService) {
+  constructor(private register: RegisterService, private storage: LocalstorageService, 
+    private stepOneService: StepOneService, private stepTwoService: StepTwoService, 
+    private userService: UserService, private candidateService: CandidateService, 
+    public dialog: MatDialog, private notification: NotificationService, 
+    public steper: SteperService) {
     this.initServiceFormFields();
     //this.animateDefaultValues();
     this.animateSteperAccordingToCurrentPhase();
@@ -160,8 +162,6 @@ export class RegisterSteperComponent implements OnInit {
     this.steper.currentStepTwoMilestoneCircleState.subscribe(res => this.stepTwoMilestoneCircleState = res);
     this.steper.currentStepThreeBtnState.subscribe(res => this.stepThreeBtnState = res);
     this.steper.currentStepThreeBtnIcoState.subscribe(res => this.stepThreeBtnIcoState = res);
-
-
   }
 
   animateSteperAccordingToCurrentPhase() {
@@ -218,6 +218,7 @@ export class RegisterSteperComponent implements OnInit {
     es positiva se realizan operaciones de escritura en el Back End, de lo contrario se 
     genera un error.*/
   validateStep1() {
+    this.register.changeHideLoading(false);
     let candidate = {
       "firstName": this.step1FormFirstName,
       "lastName": this.step1FormLastName,
@@ -230,6 +231,7 @@ export class RegisterSteperComponent implements OnInit {
     }
 
     if (!this.step1IsFormValid) {
+      this.register.changeHideLoading(true);
       this.notification.warn('¡Error, hay campos obligatorios que no han sido llenados o no cumplen con las reglas !');
       return;
     }
@@ -237,10 +239,12 @@ export class RegisterSteperComponent implements OnInit {
     // GetUserByUsername -----------------------------------------------------------------
     this.userService.getUserByUsername(this.step1FormUsername).subscribe(res => {
       if (res[0] != null) {
+        this.register.changeHideLoading(true);
         this.notification.warn('¡Error, ese usuario ya se encuentra registrado!');
         return;
       }
       if (this.step1FormPassword != this.step1FormPasswordConfirm) {
+        this.register.changeHideLoading(true);
         this.notification.warn('¡Error, las contraseñas no coinciden!');
         return;
       }
@@ -260,7 +264,7 @@ export class RegisterSteperComponent implements OnInit {
             this.notification.warn('Paso 1 concluido exitosamente');
             this.storage.changeStepPhase('two');
             this.animateSteperAccordingToCurrentPhase();
-            console.log();
+            this.register.changeHideLoading(true);
           });
           // CreateUser -----------------------------------------------------------------
         });
@@ -271,6 +275,7 @@ export class RegisterSteperComponent implements OnInit {
   }
 
   validateStep2() {
+    this.register.changeHideLoading(false);
     let candidate = {
       "firstName": this.step1FormFirstName,
       "lastName": this.step1FormLastName,
@@ -292,6 +297,7 @@ export class RegisterSteperComponent implements OnInit {
 
     if (!this.step2IsFormValid) {
       this.notification.warn('¡Error, hay campos obligatorios que no han sido llenados o no cumplen con las reglas !');
+      this.register.changeHideLoading(true);
       return;
     }
     
@@ -299,6 +305,7 @@ export class RegisterSteperComponent implements OnInit {
     this.candidateService.findCandidateId(candidate).subscribe(res => {
       // UpdateCandidate -----------------------------------------------------------------
       this.candidateService.updateCandidate(res, candidate).subscribe(res => {
+        this.register.changeHideLoading(true);
         this.notification.warn('Paso 2 concluido exitosamente');
         this.storage.changeStepPhase('three');
         this.animateSteperAccordingToCurrentPhase();

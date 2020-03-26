@@ -1,10 +1,25 @@
+<div id="loading" *ngIf="!hideLoading">
+  <object type="image/svg+xml" data="https://novaresidencia.000webhostapp.com/imagenes/tilesets/Spinner.svg"></object>
+</div>
+
+<div id="bar"></div>
+
 <div id="login-section">
-    <div class="login-card">
-        <i class="fas fa-user-circle ico"></i>
-        <h1>Member Login</h1>
-        <input [(ngModel)]="username" id="username" type="text" placeholder="E.g. pabloeng05">
-        <input [(ngModel)]="password" id="password" type="password" placeholder="E.g. pabloeng05">
-        <input (click)="authUser()" id="auth" type="button" value="Sign in">
-        <p id="password-forgotten" [routerLink]="['/register']">¿Sin cuenta? crear una</p>                           
-    </div>
+  <div class="login-image">
+    <h1>Iniciar Sesión</h1>
+  </div>
+  <div class="login-card">
+    <!--<i class="fas fa-user-circle ico"></i>
+    <h1>Member Login</h1>-->
+    <mat-form-field appearance="outline">
+      <mat-label>Usuario: </mat-label>
+      <input matInput placeholder="Ex. pabloeng05" [(ngModel)]="username">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Contraseña: </mat-label>
+      <input matInput [type]="'password'" placeholder="Ex. pabloeng05" [(ngModel)]="password">
+    </mat-form-field>
+    <input (click)="authUser()" id="auth" type="button" value="Sign in">
+    <p id="password-forgotten" [routerLink]="['/register']">¿Sin cuenta? crear una</p>
+  </div>
 </div>

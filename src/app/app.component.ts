@@ -53,7 +53,7 @@ export class AppComponent {
     if (localStorage.getItem('step2FormCareer') == null) this.stepTwoService.changeStep2FormCareer('')
     if (localStorage.getItem('step2FormCareerLevel') == null) this.stepTwoService.changeStep2FormCareerLevel('Licenciatura')
     if (localStorage.getItem('step2FormCategory') == null) this.stepTwoService.changeStep2FormCategory('Tecnologías de la Información')
-    if (localStorage.getItem('step2FormExperience') == null) this.stepTwoService.changeStep2FormExperience(0)
+    if (localStorage.getItem('step2FormExperience') == null) this.stepTwoService.changeStep2FormExperience('')
     if (localStorage.getItem('step2FormLanguage') == null) this.stepTwoService.changeStep2FormLanguage('Inglés')
     if (localStorage.getItem('step2FormLanguageLevel') == null) this.stepTwoService.changeStep2FormLanguageLevel('A1')
     if (localStorage.getItem('step2FormAllLanguages') == null) this.stepTwoService.changeStep2FormAllLanguages([])

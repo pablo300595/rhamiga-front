@@ -134,16 +134,20 @@ export class RegisterStepOneComponent implements OnInit {
 
   getErrorMessageAge(){
     if(this.ageFormControl.hasError('required')){
+      this.stepOneService.changeStep1IsValid(false);
       return 'Campo requerido';
     } else if(this.ageFormControl.hasError('min')) {
+      this.stepOneService.changeStep1IsValid(false);
       return 'El número mínimo es 18';
     } else if(this.ageFormControl.hasError('max')) {
+      this.stepOneService.changeStep1IsValid(false);
       return 'El número máximo es 100';
     } else return;
   }
 
   getErrorMessageCity(){
     if(this.cityFormControl.hasError('required')){
+      this.stepOneService.changeStep1IsValid(false);
       return 'Campo requerido';
     } else return;
   }
